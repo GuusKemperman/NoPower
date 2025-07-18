@@ -3,7 +3,9 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
@@ -14,11 +16,14 @@ public class PlayerMovement : MonoBehaviour
     
     private Plane rotationPlane = new(Vector3.up, Vector3.zero);
     private Camera camera;
+    private CharacterController characterController = null;
+    public float Speed => speed;
 
     private void Start()
     {
         camera = Camera.main;
         rotationPlane = new(Vector3.up, Vector3.zero);
+        characterController = GetComponent<CharacterController>();
     }
 
     private void Update()
@@ -36,10 +41,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 input = default;
         input.x = input2d.x;
         input.z = input2d.y;
-
-
-        Vector3 nextPos = transform.position + input * Time.deltaTime * speed;
-        transform.position = nextPos;
+        
+        characterController.Move(input * Time.deltaTime * speed);
     }
 
     private void HandleRotationMouse()
