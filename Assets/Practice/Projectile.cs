@@ -17,7 +17,16 @@ public class Projectile : MonoBehaviour
 
         if (timeAliveRemaining < 0)
         {
-            Destroy(this);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<EnemyMovement>() != null)
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }

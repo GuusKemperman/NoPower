@@ -21,7 +21,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         Debug.Log("Fire");
 
-        Instantiate(projectile, transform);
+        Instantiate(projectile, transform.position, transform.rotation);
     }
 
     private void OnCollisionEnter(Collision collision)

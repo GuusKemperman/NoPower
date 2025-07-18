@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 20
-  spawnInterval: 1
+  spawnRadius: 40
+  spawnInterval: 0.25
   enemyPrefab: {fileID: 1533894257453327987, guid: 5e3e358dc8a5166489feaef7058b046b, type: 3}
 --- !u!114 &859616417
 MonoBehaviour:

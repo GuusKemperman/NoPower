@@ -28,16 +28,16 @@ public class EnemyMovement : MonoBehaviour
         transform.position += delta.normalized * Time.deltaTime * speed;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject == player)
-        {
-            // Deal damage
-            Destroy(player);
-        }
-        else if (collision.gameObject.CompareTag("projectile"))
-        {
-            Destroy(this);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    //if (collision.gameObject == player)
+    //    //{
+    //    //    // Deal damage
+    //    //    Destroy(player);
+    //    //}
+    //    if (other.gameObject.CompareTag("projectile"))
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

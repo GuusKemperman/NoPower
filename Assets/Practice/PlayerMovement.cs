@@ -27,11 +27,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 nextPos = transform.position + input * Time.deltaTime * speed;
         Vector2 mousePos = camAction.ReadValue<Vector2>();
 
-        Debug.Log(mousePos);
-
         Camera cam = Camera.main;
         Vector3 mouseWorld = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.transform.position.y));
-        Debug.Log(mouseWorld);
 
         mouseWorld.y = 0;
 
