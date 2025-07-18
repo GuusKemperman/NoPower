@@ -27,6 +27,18 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     float updateInterval = 5.0f;
 
     [SerializeField]
+    float objectDensity = .1f;
+
+    [SerializeField]
+    float maxNonYRotation = 15.0f;
+
+    [SerializeField]
+    float heightOffset = -5.0f;
+
+    [SerializeField]
+    float maxScaleDeviation = .2f;
+
+    [SerializeField]
     float chunkSize = 20.0f;
 
     [SerializeField]
@@ -77,16 +89,47 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
 
             int radiusInCells = (int)MathF.Ceiling(generationRadius / chunkSize) + 1;
 
+            float area = chunkSize * chunkSize;
+            float avgNumObjectsPerChunk = objectDensity * area;
+
             for (int x = chunkPosOfPlayerChunk.x - radiusInCells; x <= chunkPosOfPlayerChunk.x + radiusInCells; x++)
             {
                 for (int y = chunkPosOfPlayerChunk.y - radiusInCells; y <= chunkPosOfPlayerChunk.y + radiusInCells; y++)
                 {
+                    int chunkHash = HashCode.Combine(x, y);
+                    System.Random rnd = new System.Random(chunkHash);
+
                     Chunk chunk = new Chunk();
                     chunk.cellPos = new Vector2Int(x, y);
                     chunk.objectsInChunk = new List<GameObject>();
 
                     Vector2 cellWorld2D = CellToWorld(chunk.cellPos);
                     Vector3 cellWorld3D = new Vector3(cellWorld2D.x, 0f, cellWorld2D.y);
+
+                    float numObjectsFloat = (float)rnd.NextDouble() * avgNumObjectsPerChunk * 2.0f;
+
+                    int numObjectsInt = Convert.ToBoolean(rnd.Next() & 1) ? (int)MathF.Floor(numObjectsFloat) :
+                            (int)MathF.Ceiling(numObjectsFloat);
+
+                    for (int i = 0; i < numObjectsInt; i++)
+                    {
+                        int objIndex = rnd.Next() % decoration.Count;
+                        GameObject toSpawn = decoration[objIndex];
+
+                        Vector3 offset = new Vector3((float)rnd.NextDouble() * chunkSize,
+                            heightOffset, 
+                            (float)rnd.NextDouble() * chunkSize);
+
+                        Quaternion rot = Quaternion.Euler((float)rnd.NextDouble() * 2.0f * maxNonYRotation - maxNonYRotation, 
+                            (float)rnd.NextDouble() * 360.0f,
+                            (float)rnd.NextDouble() * 2.0f * maxNonYRotation - maxNonYRotation);
+
+                        float scale = (float)rnd.NextDouble() * maxScaleDeviation * 2.0f + 1f;
+
+                        GameObject newDecoration = Instantiate(toSpawn, cellWorld3D + offset, rot);
+                        newDecoration.transform.localScale = new Vector3(scale, scale, scale);
+                        chunk.objectsInChunk.Add(newDecoration);
+                    }
 
                     GameObject ground = Instantiate(chunkGround, cellWorld3D, Quaternion.identity);
                     ground.transform.localScale = new Vector3(chunkSize, 1.0f, chunkSize);

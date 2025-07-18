@@ -45,7 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateInterval: 5
+  objectDensity: 0.05
+  maxNonYRotation: 15
+  heightOffset: -0.1
+  maxScaleDeviation: 0.2
   chunkSize: 20
   generationRadius: 100
   chunkGround: {fileID: 1477086196780268976, guid: d3fd08a17caf5094aba4156ec79f2237, type: 3}
-  decoration: []
+  decoration:
+  - {fileID: 919132149155446097, guid: 60978cdeb7c48394ab5a17084122d378, type: 3}
+  - {fileID: 919132149155446097, guid: ec1b157e69462254f94dd6937be9d0c9, type: 3}
+  - {fileID: 919132149155446097, guid: 7ac509699a9acd3478b60a8569c16921, type: 3}
+  - {fileID: 919132149155446097, guid: 224784f3650e9c644bc4ff454ad46ff5, type: 3}
