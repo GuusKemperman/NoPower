@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,16 +11,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float speed = 10f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
-
-        InputAction movementAction = actionMap.FindAction("move");
+        InputAction movementAction = actionMap.FindAction("Move");
 
         Vector2 input2d = movementAction.ReadValue<Vector2>();
         
@@ -27,14 +22,20 @@ public class PlayerMovement : MonoBehaviour
         input.x = input2d.x;
         input.z = input2d.y;
 
+        InputAction camAction = actionMap.FindAction("MousePos");
+
         Vector3 nextPos = transform.position + input * Time.deltaTime * speed;
+        Vector2 mousePos = camAction.ReadValue<Vector2>();
 
-        if (nextPos == transform.position)
-        {
-            return;
-        }
+        Debug.Log(mousePos);
 
-        transform.LookAt(nextPos);
+        Camera cam = Camera.main;
+        Vector3 mouseWorld = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.transform.position.y));
+        Debug.Log(mouseWorld);
+
+        mouseWorld.y = 0;
+
+        transform.LookAt(mouseWorld);
         transform.position = nextPos;
     }
 }

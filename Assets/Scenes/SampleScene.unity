@@ -235,6 +235,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionMap: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   speed: 10
+--- !u!114 &859616416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859616414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 20
+  spawnInterval: 1
+  enemyPrefab: {fileID: 1533894257453327987, guid: 5e3e358dc8a5166489feaef7058b046b, type: 3}
+--- !u!114 &859616417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859616414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a3a7249d1b43994abcea0fedfb921a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireAction:
+    m_Name: Fire
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 829117e0-190b-48d5-b3b9-788a64f059ad
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6bcf1404-eaa7-4d59-a7d6-9d75c2e8bb53
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 16a33efb-bd9f-4deb-9b9d-dbb2533aacb0
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
+    m_Flags: 0
+  projectile: {fileID: 4232319843606475847, guid: c687af18a8c6f4148b479f0a0e12faa3, type: 3}
 --- !u!1001 &911223209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -378,13 +431,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29717335, y: -0, z: -0, w: 0.95482355}
-  m_LocalPosition: {x: 0, y: 7.73, z: -6.26}
+  m_LocalRotation: {x: 0.44152966, y: -0, z: -0, w: 0.8972467}
+  m_LocalPosition: {x: 0, y: 15.46, z: -9.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 34.576, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 52.403, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +510,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ef7969257be0c443890486b8248a50d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 859616415}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ef7969257be0c443890486b8248a50d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 859616416}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6ef7969257be0c443890486b8248a50d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 859616417}
   m_SourcePrefab: {fileID: 100100000, guid: 6ef7969257be0c443890486b8248a50d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
