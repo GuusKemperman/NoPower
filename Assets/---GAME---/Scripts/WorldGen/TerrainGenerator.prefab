@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49c271017ee0b949acd6c11918bc871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateInterval: 5
-  objectDensity: 0.05
-  maxNonYRotation: 15
-  heightOffset: -0.1
-  maxScaleDeviation: 0.2
-  chunkSize: 20
+  updateInterval: 10
+  objectDensity: 0.06
+  maxNonYRotation: 10
+  heightOffset: -0.2
+  maxScaleDeviation: 0.3
+  chunkSize: 32
   generationRadius: 100
   chunkGround: {fileID: 1477086196780268976, guid: d3fd08a17caf5094aba4156ec79f2237, type: 3}
   decoration:
