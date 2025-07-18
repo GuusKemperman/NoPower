@@ -23,10 +23,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<EnemyMovement>() != null)
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-        }
+        Destroy(other.gameObject);
+        Destroy(gameObject);
     }
 }
