@@ -33,12 +33,22 @@ public class PlayerInteraction : MonoBehaviour
     private void DetectInteractables()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, playerInteractionDistance);
-        
-        if (colliders.Length == 0) return;
+
+        if (colliders.Length == 0)
+        {
+            detectedInteractable?.PlayerLeftRange(playerTag);
+            detectedInteractable = null;
+            return;
+        }
         
         Collider[] ineractables = colliders.Where(x => x.GetComponent<BaseInteractable>()).OrderBy(x=>Vector3.Distance(transform.position,x.transform.position)).ToArray();
-        
-        if (ineractables.Length == 0) return;
+
+        if (ineractables.Length == 0)
+        {
+            detectedInteractable?.PlayerLeftRange(playerTag);
+            detectedInteractable = null;
+            return;
+        }
         
         BaseInteractable closest = ineractables[0].GetComponent<BaseInteractable>();
         if (detectedInteractable == closest) return;
