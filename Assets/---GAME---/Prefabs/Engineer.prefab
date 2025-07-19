@@ -2226,6 +2226,7 @@ GameObject:
   - component: {fileID: 664942202846799596}
   - component: {fileID: 6373272207623022039}
   - component: {fileID: 8932948380695716933}
+  - component: {fileID: 97694275907845916}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -2367,6 +2368,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInteractionDistance: 5
   actionMap: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+--- !u!114 &97694275907845916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799730976438632927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7080dfbae97001b4d83137cfdfadeefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
 --- !u!1 &8269647685206427098
 GameObject:
   m_ObjectHideFlags: 0
