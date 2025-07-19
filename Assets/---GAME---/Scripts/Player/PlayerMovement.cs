@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,11 +14,22 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     float speed = 10f;
-    
+
+    [SerializeField]
+    AudioSource footstepSource;
+
+    [SerializeField]
+    List<AudioClip> footstepClips = new List<AudioClip>();
+
     private Plane rotationPlane = new(Vector3.up, Vector3.zero);
     private Camera camera;
     private CharacterController characterController = null;
     public float Speed => speed;
+
+    [SerializeField]
+    float distancePerFootStep = .5f;
+
+    float footstepsDistancePending = 0;
 
     private void Start()
     {
@@ -30,9 +42,6 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         HandleRotationMouse();
-
-
-
     }
 
     private void HandleMovement()
@@ -44,8 +53,22 @@ public class PlayerMovement : MonoBehaviour
         Vector3 input = default;
         input.x = input2d.x;
         input.z = input2d.y;
-        
+
+        Vector3 prevPos = characterController.transform.position;
+
         characterController.Move(input * Time.deltaTime * speed);
+
+        Vector3 currPos = characterController.transform.position;
+
+        footstepsDistancePending += Vector3.Distance(prevPos, currPos);
+        
+        while (footstepsDistancePending > 0)
+        {
+            footstepSource.clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Count)];
+            footstepSource.Play();
+
+            footstepsDistancePending -= distancePerFootStep;
+        }
     }
 
     private void HandleRotationMouse()
