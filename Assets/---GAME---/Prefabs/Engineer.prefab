@@ -2228,6 +2228,8 @@ GameObject:
   - component: {fileID: 8932948380695716933}
   - component: {fileID: 97694275907845916}
   - component: {fileID: 3947017091745473002}
+  - component: {fileID: 4794749260939716244}
+  - component: {fileID: 1431002397591678777}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -2413,6 +2415,38 @@ MonoBehaviour:
     m_Flags: 0
   turretPrefab: {fileID: 749312139498176331, guid: c06a0d89e6097da489b6d0837abbbde1, type: 3}
   spawnCost: 25
+--- !u!114 &4794749260939716244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799730976438632927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 30
+  spawnInterval: 0.2
+  enemyPrefab: {fileID: 8000909897425623591, guid: 8c8553062ce54d543a492c80154df312, type: 3}
+  maxEnemiesActive: 40
+--- !u!114 &1431002397591678777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799730976438632927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 30
+  spawnInterval: 0.2
+  enemyPrefab: {fileID: 8000909897425623591, guid: 8c8553062ce54d543a492c80154df312, type: 3}
+  maxEnemiesActive: 40
 --- !u!1 &8269647685206427098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2719,6 +2753,18 @@ PrefabInstance:
     - target: {fileID: 4539005760591940317, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
       propertyPath: m_Name
       value: TerrainGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: navmeshPrefab
+      value: 
+      objectReference: {fileID: 6965301066652638189, guid: e70cfc8746c30df4782c560676f80218, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: updateInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: generationRadius
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

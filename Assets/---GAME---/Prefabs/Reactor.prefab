@@ -1243,6 +1243,7 @@ GameObject:
   - component: {fileID: 7986465652128293866}
   - component: {fileID: 6494615978176934397}
   - component: {fileID: 5043081822883310388}
+  - component: {fileID: 3387016769989622838}
   m_Layer: 0
   m_Name: Reactor
   m_TagString: Untagged
@@ -1305,6 +1306,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 4
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!208 &3387016769989622838
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8520493086823530414}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4, y: 4, z: 4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8539130584987916801
 GameObject:
   m_ObjectHideFlags: 0

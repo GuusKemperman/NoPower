@@ -3,6 +3,8 @@ using Palmmedia.ReportGenerator.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
+using Unity.Mathematics;
 using UnityEngine;
 
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -48,7 +50,8 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     [SerializeField]
     GameObject chunkGround = null;
 
-
+    [SerializeField] private GameObject navmeshPrefab = null;
+    
     [SerializeField]
     List<GameObject> decoration = new List<GameObject>();
 
@@ -71,6 +74,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     float numReactorsPerCircumferenceDistanceFactor = .9f;
 
     float currentlySpawnedReactorsAtDistance = 0;
+    private NavMeshSurface surface = null;
 
     Vector2 CellToWorld(Vector2Int cellPos)
     {
@@ -80,8 +84,14 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        InitializeNavmesh();
         StartCoroutine(UpdateTerrain());
         StartCoroutine(SpawnReactors());
+    }
+
+    private void InitializeNavmesh()
+    {
+       surface = Instantiate(navmeshPrefab, transform.position, quaternion.identity).GetComponent<NavMeshSurface>();
     }
 
     IEnumerator UpdateTerrain()
@@ -175,8 +185,15 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                 }
             }
 
+            UpdateNavigation();
             yield return new WaitForSeconds(updateInterval);
         }
+    }
+
+    private void UpdateNavigation()
+    {
+        surface.transform.position = new Vector3(player.transform.position.x,0,player.transform.position.z);
+        surface.BuildNavMesh();
     }
 
     IEnumerator SpawnReactors()
