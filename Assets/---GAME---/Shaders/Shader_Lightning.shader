@@ -3,7 +3,8 @@ Shader "Unlit/Shader_Lightning"
     Properties
     {
         _Color("Color", Color) = (1,1,1,1)
-        _Glow("Glow Intensity", Float) = 5
+        _Glow("Glow Intensity", Float) = 5.0
+        _Fade("Fade Duration", Float) = 1.0
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
@@ -11,6 +12,7 @@ Shader "Unlit/Shader_Lightning"
         Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 100
         Blend SrcAlpha One
+        ZTest Always
         ZWrite Off
         Cull Off
 
@@ -23,6 +25,7 @@ Shader "Unlit/Shader_Lightning"
 
             float4 _Color;
             float _Glow;
+            float _Fade;
             sampler2D _MainTex;
 
             // -------------------------
@@ -54,11 +57,18 @@ Shader "Unlit/Shader_Lightning"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float noise = sin(_Time.y * 40 + i.uv.x * 20);
-                float brightness = saturate(noise * 0.5 + 0.5);
-                fixed4 col = _Color * brightness * _Glow;
-                col.a *= brightness;
-                return col;
+               // Flickering
+               float noise = sin(_Time.y * 40 + i.uv.x * 20);
+               float brightness = saturate(noise * 0.5 + 0.5);
+               fixed4 col = _Color * brightness * _Glow;
+
+               // Fade from left (uv.x = 0) to right (uv.x = 1) over time
+               float fadeProgress = saturate(_Time.y / _Fade);
+               float edgeWidth = 0.1; // controls softness of the fade edge
+               float alphaMask = 1.0 - smoothstep(fadeProgress - edgeWidth, fadeProgress + edgeWidth, i.uv.x);
+
+               col.a *= brightness * alphaMask;
+               return col;
             }
             ENDCG
         }
