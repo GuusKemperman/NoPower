@@ -100,17 +100,18 @@ public class enemy_behaviour : MonoBehaviour
         yield return new WaitForSeconds(attackDelay);
         if (currentState == State.Attacking)
         {
-            player.GetComponent<PlayerHealth>().ChangeHealth(-1*Damage);
+            if (player.GetComponent<PlayerHealth>().ChangeHealth(-1*Damage))
+            {
+                attackVoiceLineAudioSource.clip = attackAudioClips[Random.Range(0, attackAudioClips.Count)];
+                attackVoiceLineAudioSource.Play();
 
-            attackVoiceLineAudioSource.clip = attackAudioClips[Random.Range(0, attackAudioClips.Count)];
-            attackVoiceLineAudioSource.Play();
+                attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
+                attackImpactAudioSource.Play();
 
-            attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
-            attackImpactAudioSource.Play();
-
-            Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
-            Instantiate(hitfx, hitlocation, transform.rotation);
-            Debug.Log("Attacked");
+                Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
+                Instantiate(hitfx, hitlocation, transform.rotation);
+                Debug.Log("Attacked");
+            }
         }
     }
 
