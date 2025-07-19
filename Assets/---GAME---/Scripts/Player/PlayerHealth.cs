@@ -44,19 +44,19 @@ public class PlayerHealth : MonoBehaviour, IDependencyProvider
 
     }
 
-    public void ChangeHealth(int delta)
+    public bool ChangeHealth(int delta)
     {
-        if (!Invincible)
+        if (Invincible)
         {
-            currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
-            OnHealthChanged?.Invoke(currentHealth);
-            StartCoroutine(InvincibilityTimer());
+            return false;
         }
 
-        if (currentHealth <= 0)
-        {
-            OnPlayerDied?.Invoke();
-        }
+        currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
+        OnHealthChanged?.Invoke(currentHealth);
+        StartCoroutine(InvincibilityTimer());
+        
+        OnPlayerDied?.Invoke();
+        return true;
     }
 
     IEnumerator InvincibilityTimer()

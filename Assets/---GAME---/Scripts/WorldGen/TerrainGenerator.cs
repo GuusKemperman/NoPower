@@ -41,8 +41,12 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     [SerializeField]
     float maxScaleDeviation = .2f;
 
+
+
     [SerializeField]
     float chunkSize = 20.0f;
+
+    [SerializeField] int numberOfBuildingsInChunk = 1;
 
     [SerializeField]
     float generationRadius = 100.0f;
@@ -54,6 +58,10 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     
     [SerializeField]
     List<GameObject> decoration = new List<GameObject>();
+
+
+    [SerializeField] 
+    List<GameObject> buildings = new List<GameObject>();
 
     [SerializeField]
     GameObject reactorPrefab = null;
@@ -92,6 +100,22 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     private void InitializeNavmesh()
     {
        surface = Instantiate(navmeshPrefab, transform.position, quaternion.identity).GetComponent<NavMeshSurface>();
+    }
+
+    private void InstanciateManMadeObject(Chunk chunk, System.Random rnd, Vector3 chunkPos)
+    {
+        int objIndex = rnd.Next() % buildings.Count;
+        GameObject toSpawn = buildings[objIndex];
+
+        Vector3 offset = new Vector3((float)rnd.NextDouble() * chunkSize,
+            heightOffset,
+            (float)rnd.NextDouble() * chunkSize);
+
+        Quaternion rot = Quaternion.Euler(0, (float)rnd.NextDouble() * 360.0f, 0);
+
+        GameObject newDecoration = Instantiate(toSpawn, chunkPos + offset, rot);
+     
+        chunk.objectsInChunk.Add(newDecoration);
     }
 
     IEnumerator UpdateTerrain()
@@ -162,6 +186,11 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                         GameObject newDecoration = Instantiate(toSpawn, cellWorld3D + offset, rot);
                         newDecoration.transform.localScale = new Vector3(scale, scale, scale);
                         chunk.objectsInChunk.Add(newDecoration);
+                    }
+
+                    for (int i = 0; i < numberOfBuildingsInChunk; i++)
+                    {
+                        InstanciateManMadeObject(chunk, rnd,cellWorld3D);
                     }
 
                     GameObject ground = Instantiate(chunkGround, cellWorld3D, Quaternion.identity);
