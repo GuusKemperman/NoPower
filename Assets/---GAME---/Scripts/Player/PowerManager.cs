@@ -7,7 +7,8 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
 {
     [SerializeField] private int maxPower = 100;
     [SerializeField,ReadOnly] private int currentPower = 100;
-
+    public int MaxPower => maxPower;
+    
     public event Action<int> OnPowerChange; 
     
     [DependencyInjection.Provide]
@@ -19,5 +20,6 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
     public void ChangePower(int delta)
     {
         currentPower = Mathf.Clamp(currentPower + delta, 0, maxPower);
+        OnPowerChange?.Invoke(currentPower);
     }
 }
