@@ -7,6 +7,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random; // Required for NavMeshAgent
 
+public enum State
+{
+    Walking,
+    Attacking,
+    Dead
+}
+
 public class enemy_behaviour : MonoBehaviour
 {
     public Transform player;
@@ -16,7 +23,7 @@ public class enemy_behaviour : MonoBehaviour
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
     public float AttackRadius = 10;
-    public static event Action EnemyDied;
+    public static event Action<enemy_behaviour> EnemyDied;
     
     [SerializeField]
     AudioSource attackVoiceLineAudioSource;
@@ -35,15 +42,12 @@ public class enemy_behaviour : MonoBehaviour
     
     [SerializeField] float damageToPlayer = 3;
 
-    private enum State
-    {
-        Walking,
-        Attacking
-    }
-
     public float AttackInterval = 100;
     private float AttackTimer = 0;
     private State currentState;
+
+    public State CurrentState => currentState;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,7 +57,7 @@ public class enemy_behaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        EnemyDied?.Invoke();
+        EnemyDied?.Invoke(this);
     }
 
     // Update is called once per frame
@@ -61,14 +65,13 @@ public class enemy_behaviour : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer < AttackRadius)
+        if (distanceToPlayer < AttackRadius && currentState != State.Dead)
         {
             currentState = State.Attacking;
         }
-        else
+        else if(distanceToPlayer > AttackRadius && currentState != State.Dead)
         {
             currentState = State.Walking;
-         
         }
 
         //update Attack timer
@@ -86,6 +89,9 @@ public class enemy_behaviour : MonoBehaviour
 
             case State.Attacking:
                 Attack();
+                break;
+            case State.Dead:
+                Destroy(gameObject,1.0f);
                 break;
         }
         }
@@ -144,7 +150,11 @@ public class enemy_behaviour : MonoBehaviour
             {
                 if (Health <= 0)
                 {
-                    Destroy(gameObject);
+                    currentState = State.Dead;
+                    agent.enabled = false;
+                    enemyMeshObject.GetComponent<Animator>().SetTrigger("Die");
+                    enemyMeshObject.GetComponent<SphereCollider>().enabled = false;
+                    Destroy(gameObject,1.5f);
                 }
             });
 

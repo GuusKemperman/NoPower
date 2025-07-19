@@ -24,7 +24,7 @@ public class PlayerDeathVisual : MonoBehaviour
         playerHealth.OnPlayerDied -= HandleDeath; 
     }
 
-    private void AddCounter()
+    private void AddCounter(enemy_behaviour beh)
     {
         killedEnemies++;
     }

@@ -18,6 +18,12 @@ public class TurretShooting : MonoBehaviour
     private void Awake()
     {
         shotTimer = fireRate;
+        enemy_behaviour.EnemyDied += HandleEnemyDeath;
+    }
+    
+    private void OnDestroy()
+    {
+        enemy_behaviour.EnemyDied -= HandleEnemyDeath;
     }
 
     private void Update()
@@ -26,6 +32,14 @@ public class TurretShooting : MonoBehaviour
         closestTarget = FindClosestTarget();
         HandleAiming();
         HandleShooting();
+    }
+
+    private void HandleEnemyDeath(enemy_behaviour obj)
+    {
+        if (obj.GetComponent<TurretTarget>() == closestTarget)
+        {
+            closestTarget = null;
+        }
     }
 
     private void HandleShooting()
@@ -59,7 +73,8 @@ public class TurretShooting : MonoBehaviour
 
         Collider[] hits = Physics.OverlapSphere(transform.position, range);
         Collider[] targets = hits.Where(x => x.GetComponent<TurretTarget>() != null).OrderBy(x=>Vector3.Distance(x.transform.position,transform.position)).ToArray();
-
+        targets = targets.Where(x => x.GetComponent<enemy_behaviour>().CurrentState != State.Dead).ToArray();
+        
         if (targets.Length == 0) return null;
         closest = targets[0].GetComponent<TurretTarget>();
         
