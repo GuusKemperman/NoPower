@@ -1,3 +1,4 @@
+using DependencyInjection;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -5,6 +6,9 @@ using UnityEngine.Assertions;
 
 public class Reactor : BaseInteractable
 {
+
+    [Inject] private PowerManager powerManager = null;
+
     [SerializeField]
     public float maxAmountOfPower = 100.0f;
 
@@ -12,7 +16,6 @@ public class Reactor : BaseInteractable
 
     [SerializeField]
     float rechargeTime = 5.0f;
-
 
     [SerializeField]
     Light reactorLight = null;
@@ -32,6 +35,8 @@ public class Reactor : BaseInteractable
     {
         intensityLight = reactorLight.intensity;
         currentAmountOfPower = maxAmountOfPower;
+        powerManager = FindAnyObjectByType<PowerManager>();
+        Assert.IsNotNull(powerManager);
     }
 
     public bool CanDeplete()
@@ -43,6 +48,8 @@ public class Reactor : BaseInteractable
     public void OnDeplete()
     {
         Assert.IsTrue(CanDeplete());
+
+        powerManager.ChangePower((int)currentAmountOfPower);
 
         currentAmountOfPower = 0;
         StartCoroutine(Recharge());
