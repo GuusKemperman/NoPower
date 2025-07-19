@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1630526809769299119}
   - component: {fileID: 4235758654085743607}
   - component: {fileID: 1963499517055849901}
+  - component: {fileID: 1947078907562679213}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: enemy
@@ -51,6 +52,7 @@ MonoBehaviour:
   playerOb: {fileID: 0}
   enemyMeshObject: {fileID: 1090972848769902366}
   AttackRadius: 2
+  damageToPlayer: 3
   AttackInterval: 0.5
 --- !u!195 &4235758654085743607
 NavMeshAgent:
@@ -95,6 +97,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1947078907562679213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000909897425623591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b01ee439c554a24a8948bf1b9688671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &279931088213350991
 PrefabInstance:
   m_ObjectHideFlags: 0

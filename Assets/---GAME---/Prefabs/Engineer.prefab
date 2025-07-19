@@ -2228,8 +2228,8 @@ GameObject:
   - component: {fileID: 8932948380695716933}
   - component: {fileID: 97694275907845916}
   - component: {fileID: 3947017091745473002}
-  - component: {fileID: 7146735427356298290}
-  - component: {fileID: 5956988588762640635}
+  - component: {fileID: 4794749260939716244}
+  - component: {fileID: 1431002397591678777}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -2415,7 +2415,7 @@ MonoBehaviour:
     m_Flags: 0
   turretPrefab: {fileID: 749312139498176331, guid: c06a0d89e6097da489b6d0837abbbde1, type: 3}
   spawnCost: 25
---- !u!114 &7146735427356298290
+--- !u!114 &4794749260939716244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2424,15 +2424,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7799730976438632927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa94c4a79e4af514f93f3597431de7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActionMap: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  PlayerTransform: {fileID: 3713270173221604753}
-  PlayerEnemyDetector: {fileID: 5956988588762640635}
-  LineRendererPrefab: {fileID: 4302184665070858957, guid: e775a6b963272424ea3ecc5e5d10dffc, type: 3}
-  RefreshRate: 0.016666668
---- !u!114 &5956988588762640635
+  spawnRadius: 30
+  spawnInterval: 0.2
+  enemyPrefab: {fileID: 8000909897425623591, guid: 8c8553062ce54d543a492c80154df312, type: 3}
+  maxEnemiesActive: 40
+--- !u!114 &1431002397591678777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2441,9 +2440,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7799730976438632927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83cad70087e2855448cd1a65569a2a90, type: 3}
+  m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRadius: 30
+  spawnInterval: 0.2
+  enemyPrefab: {fileID: 8000909897425623591, guid: 8c8553062ce54d543a492c80154df312, type: 3}
+  maxEnemiesActive: 40
 --- !u!1 &8269647685206427098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2751,6 +2754,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: TerrainGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: navmeshPrefab
+      value: 
+      objectReference: {fileID: 6965301066652638189, guid: e70cfc8746c30df4782c560676f80218, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: updateInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: generationRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8414778832735781083, guid: ba06ada8e2ee1964ba07b69259090561, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[1]'
+      value: 
+      objectReference: {fileID: 276163445331682962, guid: 1e11d21a40371394f99015e92a96e652, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8071772417888686215, guid: edd07bfef8f6cac41b49ad43ccd27fd6, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6041618434301530646, guid: 307859d53bf22ac4eac79781f70dc3c2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
