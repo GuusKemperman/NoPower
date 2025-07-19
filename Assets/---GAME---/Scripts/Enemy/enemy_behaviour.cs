@@ -88,7 +88,7 @@ public class enemy_behaviour : MonoBehaviour
         {
             player.GetComponent<PlayerHealth>().ChangeHealth(-3);
 
-            Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.1f);
+            Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
             Instantiate(hitfx, hitlocation, transform.rotation);
             Debug.Log("Attacked");
         }

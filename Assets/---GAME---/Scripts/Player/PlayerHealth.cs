@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour, IDependencyProvider
     [SerializeField] private int maxHealth = 10;
     private int currentHealth = 0;
 
-    [SerializeField] float invincibilityTimeActive= 1;
+    [SerializeField] float invincibilityTimeActive= 0.1f;
     private bool Invincible = false;
 
 
@@ -36,12 +36,6 @@ public class PlayerHealth : MonoBehaviour, IDependencyProvider
 
     public void Update()
     {
-        if (Invincible)
-        {
-            Debug.Log("invinsible");
-        }
-
-        
     }
 
     public void ChangeHealth(int delta)
