@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -15,8 +16,10 @@ public class EnemyStats
     public int MovementSpeed;
 }
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, DependencyInjection.IDependencyProvider
 {
+    public float ElapsedTime => timePassed;
+    
     [SerializeField]
     float spawnRadius = 20;
 
@@ -33,6 +36,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private AnimationCurve intervalCurve;
     private float timePassed;
     private float evaulationTimer = 5.0f;
+    
+    [DependencyInjection.Provide]
+    public EnemySpawner Provide()
+    {
+        return this;
+    }
     
     void Start()
     {
