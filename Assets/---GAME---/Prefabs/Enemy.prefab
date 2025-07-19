@@ -53,6 +53,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerOb: {fileID: 0}
   hitfx: {fileID: 62011511148764793, guid: ab3478f494f9a744aa695d8a27717c5c, type: 3}
+  agent: {fileID: 0}
   enemyMeshObject: {fileID: 1090972848769902366}
   attackDelay: 0.5
   AttackRadius: 2
@@ -78,6 +79,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b03803aadb831b343bcf1794d9ed0185, type: 3}
   - {fileID: 8300000, guid: 6f982b7cb6381fb419d83725b0a0c506, type: 3}
   - {fileID: 8300000, guid: fabdbdc347d43ac4ca77607505121f80, type: 3}
+  Damage: 1
+  Health: 1
   damageToPlayer: 3
   AttackInterval: 0.5
 --- !u!195 &4235758654085743607
@@ -337,6 +340,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3333002714178778159}
     m_Modifications:
+    - target: {fileID: -9125554356371998231, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
     - target: {fileID: -8679921383154817045, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45199
@@ -389,10 +396,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4302458890680131890, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
+    - target: {fileID: -2587401318072452455, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
+    - target: {fileID: -1638655214153052297, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
+    - target: {fileID: -1598805981050171326, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
     - target: {fileID: 919132149155446097, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
       propertyPath: m_Name
       value: Skeleton_Golem
       objectReference: {fileID: 0}
+    - target: {fileID: 1144799262135512010, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
+    - target: {fileID: 3150538496148287062, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
+    - target: {fileID: 4977988467239684764, guid: 2f9c6cfd680ffdb44a99e7ad174d34ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e758f16661dc224c8154fd69a9cb452, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

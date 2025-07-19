@@ -50,6 +50,7 @@ MonoBehaviour:
   heightOffset: -0.2
   maxScaleDeviation: 0.3
   chunkSize: 32
+  numberOfBuildingsInChunk: 2
   generationRadius: 10
   chunkGround: {fileID: 1477086196780268976, guid: d3fd08a17caf5094aba4156ec79f2237, type: 3}
   navmeshPrefab: {fileID: 0}
@@ -58,9 +59,12 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: ec1b157e69462254f94dd6937be9d0c9, type: 3}
   - {fileID: 919132149155446097, guid: 7ac509699a9acd3478b60a8569c16921, type: 3}
   - {fileID: 919132149155446097, guid: 224784f3650e9c644bc4ff454ad46ff5, type: 3}
+  buildings:
+  - {fileID: 7072762227883455258, guid: 769b30e6a34fbb949ab6d5039ccd6ca4, type: 3}
+  - {fileID: 1438978902315699519, guid: 05be019f9b68e9b4c960f70a7a5a60d4, type: 3}
   reactorPrefab: {fileID: 8520493086823530414, guid: cb2d44e9b72be8340a1affd685a33231, type: 3}
   initialReactorDistance: 0
   reactorDistanceIncrease: 60
   numReactorsPerCircumference: 0.025
   minDistanceBetweenReactorsInSameLayer: 20
-  numReactorsPerCircumferenceDistanceFactor: 0.9
+  numReactorsPerCircumferenceDistanceFactor: 0.78
