@@ -73,7 +73,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     [SerializeField]
     float numReactorsPerCircumferenceDistanceFactor = .9f;
 
-    float currentlySpawnedReactorsAtDistance = 0;
+    float currentlySpawnedReactorsAtDistance = -1;
     private NavMeshSurface surface = null;
 
     Vector2 CellToWorld(Vector2Int cellPos)
@@ -213,7 +213,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                 if (currentDist > currentlySpawnedReactorsAtDistance)
                 {
                     float cirumferenceHere = currentDist * 2.0f * MathF.PI * circumFactor;
-                    int numToSpawn = (int)MathF.Ceiling(numReactorsPerCircumference * cirumferenceHere);
+                    int numToSpawn = Mathf.Max(1, (int)MathF.Ceiling(numReactorsPerCircumference * cirumferenceHere));
 
                     List<Vector3> alreadySpawnedPrefabs = new List<Vector3>();
 

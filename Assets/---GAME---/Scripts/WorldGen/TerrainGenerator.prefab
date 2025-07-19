@@ -52,13 +52,14 @@ MonoBehaviour:
   chunkSize: 32
   generationRadius: 10
   chunkGround: {fileID: 1477086196780268976, guid: d3fd08a17caf5094aba4156ec79f2237, type: 3}
+  navmeshPrefab: {fileID: 0}
   decoration:
   - {fileID: 919132149155446097, guid: 60978cdeb7c48394ab5a17084122d378, type: 3}
   - {fileID: 919132149155446097, guid: ec1b157e69462254f94dd6937be9d0c9, type: 3}
   - {fileID: 919132149155446097, guid: 7ac509699a9acd3478b60a8569c16921, type: 3}
   - {fileID: 919132149155446097, guid: 224784f3650e9c644bc4ff454ad46ff5, type: 3}
   reactorPrefab: {fileID: 8520493086823530414, guid: cb2d44e9b72be8340a1affd685a33231, type: 3}
-  initialReactorDistance: 10
+  initialReactorDistance: 0
   reactorDistanceIncrease: 60
   numReactorsPerCircumference: 0.025
   minDistanceBetweenReactorsInSameLayer: 20
