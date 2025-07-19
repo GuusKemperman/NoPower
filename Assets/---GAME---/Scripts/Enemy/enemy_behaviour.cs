@@ -107,9 +107,6 @@ public class enemy_behaviour : MonoBehaviour
 
             attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
             attackImpactAudioSource.Play();
-
-            attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
-            attackImpactAudioSource.Play();
             
             Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
             Instantiate(hitfx, hitlocation, transform.rotation);
@@ -128,6 +125,9 @@ public class enemy_behaviour : MonoBehaviour
             material.SetColor("_FlashColor", Color.white);
             material.SetFloat("_FlashAmount", 0);
 
+            attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
+            attackImpactAudioSource.Play();
+            
             Sequence flashSeq = DOTween.Sequence();
             flashSeq.Append(material.DOFloat(1f, "_FlashAmount", 0.12f));
             flashSeq.Append(material.DOFloat(0f, "_FlashAmount", 0.12f));
