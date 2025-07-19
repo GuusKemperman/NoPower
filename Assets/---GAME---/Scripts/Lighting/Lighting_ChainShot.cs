@@ -12,6 +12,16 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] GameObject LineRendererPrefab = null;
     [SerializeField] float RefreshRate = 1.0f / 60.0f;
 
+    [SerializeField] float minRayLength = 3.0f;
+    [SerializeField] float maxRayLength = 9.0f;
+
+    [SerializeField] float regularDeviationAngle = 15.0f;
+    [SerializeField] float splittingDeviationAngle = 45.0f;
+
+
+    [SerializeField] float maxTravelDist = 45.0f;
+
+
     bool IsShooting = false;            // Holds if in the current frame the player is shooting or not.
     bool IsLineRendererSpawned = false; // Used as flag to spawn a new line renderer on the first frame of began shooting, later frames we do not need to spawn anymore.
     List<GameObject> SpawnedLineRenderers = new List<GameObject>();
