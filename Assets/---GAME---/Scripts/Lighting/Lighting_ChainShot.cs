@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class Lighting_ChainShot : MonoBehaviour
 {
@@ -21,7 +23,7 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] float splitChancePerLength = .1f;
 
     [SerializeField] float maxTravelDist = 45.0f;
-
+    
     struct ChainLine
     {
         public ChainLine(Vector2 a_start, Vector2 a_end)

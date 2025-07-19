@@ -10,7 +10,8 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
     public int MaxPower => maxPower;
     public int CurrentPower => currentPower;
 
-    public event Action<int> OnPowerChange; 
+    public event Action<int> OnPowerChange;
+    public static event Action OnGainedPower; 
     
     [DependencyInjection.Provide]
     public PowerManager Provide()
@@ -27,5 +28,6 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
     {
         currentPower = Mathf.Clamp(currentPower + delta, 0, maxPower);
         OnPowerChange?.Invoke(currentPower);
+        OnGainedPower?.Invoke();
     }
 }
