@@ -11,6 +11,7 @@ Shader "Unlit/Shader_Lightning"
         Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 100
         Blend SrcAlpha One
+        ZTest Always
         ZWrite Off
         Cull Off
 
