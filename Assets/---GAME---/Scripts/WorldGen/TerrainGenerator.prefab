@@ -62,6 +62,8 @@ MonoBehaviour:
   buildings:
   - {fileID: 7072762227883455258, guid: 769b30e6a34fbb949ab6d5039ccd6ca4, type: 3}
   - {fileID: 1438978902315699519, guid: 05be019f9b68e9b4c960f70a7a5a60d4, type: 3}
+  - {fileID: 7772853191961361245, guid: 50f00bd1f60702547893dcc7f0ee13db, type: 3}
+  - {fileID: 3836077136202070985, guid: 5344bc77ded535e4181c7e80395a0c7f, type: 3}
   reactorPrefab: {fileID: 8520493086823530414, guid: cb2d44e9b72be8340a1affd685a33231, type: 3}
   initialReactorDistance: 0
   reactorDistanceIncrease: 60

@@ -46,7 +46,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     [SerializeField]
     float chunkSize = 20.0f;
 
-    [SerializeField] int numberOfBuildingsInChunk = 1;
+    [SerializeField] float numberOfBuildingsInChunk = 0.5f;
 
     [SerializeField]
     float generationRadius = 100.0f;
@@ -188,7 +188,14 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                         chunk.objectsInChunk.Add(newDecoration);
                     }
 
-                    for (int i = 0; i < numberOfBuildingsInChunk; i++)
+
+
+                    int numManMadeObjectsInt = Convert.ToBoolean(rnd.Next() & 1)
+                        ? (int)MathF.Floor(numberOfBuildingsInChunk)
+                        : (int)MathF.Ceiling(numberOfBuildingsInChunk);
+
+
+                    for (int i = 0; i < numManMadeObjectsInt; i++)
                     {
                         InstanciateManMadeObject(chunk, rnd,cellWorld3D);
                     }
