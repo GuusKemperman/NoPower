@@ -224,19 +224,22 @@ public class Lighting_ChainShot : MonoBehaviour
 
             for (int i = 0; i < 5; i++)
             {
-                ChainLine next = GetNewLine(curr.start, curr.end, true);
+                ChainLine next = GetNewLine(curr.start, curr.end, false);
+                totalLength += (next.start - next.end).magnitude;
 
                 if (next.hit != null)
                 {
                     next.hit.TakeDamage(damageAmount);
+                    closed.Add(next);
                 }
                 else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
                 {
                     continue;
                 }
-
-                totalLength += (next.start - next.end).magnitude;
-                open.Add(next);
+                else
+                {
+                    open.Add(next);
+                }
                 break;
             }
 
@@ -247,18 +250,21 @@ public class Lighting_ChainShot : MonoBehaviour
                 for (int i = 0; i < 5; i++)
                 {
                     ChainLine next = GetNewLine(curr.start, curr.end, true);
+                    totalLength += (next.start - next.end).magnitude;
 
                     if (next.hit != null)
                     {
                         next.hit.TakeDamage(damageAmount);
+                        closed.Add(next);
                     }
                     else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
                     {
                         continue;
                     }
-
-                    totalLength += (next.start - next.end).magnitude;
-                    open.Add(next);
+                    else
+                    {
+                        open.Add(next);
+                    }
                     break;
                 }
             }
