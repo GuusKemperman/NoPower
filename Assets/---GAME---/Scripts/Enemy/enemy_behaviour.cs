@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.AI; // Required for NavMeshAgent
@@ -107,7 +108,7 @@ public class enemy_behaviour : MonoBehaviour
 
             attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
             attackImpactAudioSource.Play();
-
+            
             Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
             Instantiate(hitfx, hitlocation, transform.rotation);
             Debug.Log("Attacked");
@@ -117,9 +118,26 @@ public class enemy_behaviour : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
-        if (Health <= 0)
+
+        foreach (SkinnedMeshRenderer meshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
-            Destroy(gameObject);
+            Material material = meshRenderer.material;
+
+            material.SetColor("_FlashColor", Color.white);
+            material.SetFloat("_FlashAmount", 0);
+
+            Sequence flashSeq = DOTween.Sequence();
+            flashSeq.Append(material.DOFloat(1f, "_FlashAmount", 0.12f));
+            flashSeq.Append(material.DOFloat(0f, "_FlashAmount", 0.12f));
+            flashSeq.OnComplete(() =>
+            {
+                if (Health <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            });
+
+        flashSeq.Play();
         }
     }
 }
