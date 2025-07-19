@@ -2229,7 +2229,6 @@ GameObject:
   - component: {fileID: 97694275907845916}
   - component: {fileID: 3947017091745473002}
   - component: {fileID: 4794749260939716244}
-  - component: {fileID: 1431002397591678777}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -2384,6 +2383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  invincibilityTimeActive: 1
+  playerCollider: {fileID: 0}
 --- !u!114 &3947017091745473002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,22 +2417,6 @@ MonoBehaviour:
   turretPrefab: {fileID: 749312139498176331, guid: c06a0d89e6097da489b6d0837abbbde1, type: 3}
   spawnCost: 25
 --- !u!114 &4794749260939716244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7799730976438632927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65451f402cab56448d2f99e90804d3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnRadius: 30
-  spawnInterval: 0.2
-  enemyPrefab: {fileID: 8000909897425623591, guid: 8c8553062ce54d543a492c80154df312, type: 3}
-  maxEnemiesActive: 40
---- !u!114 &1431002397591678777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
