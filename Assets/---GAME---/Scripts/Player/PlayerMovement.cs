@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 prevPos = characterController.transform.position;
 
         characterController.Move(input * Time.deltaTime * speed);
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         Vector3 currPos = characterController.transform.position;
 
