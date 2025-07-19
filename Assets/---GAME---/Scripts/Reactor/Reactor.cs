@@ -81,7 +81,6 @@ public class Reactor : BaseInteractable
             currentAmountOfPower += amountPerSecond * Time.deltaTime;
             hummingSource.volume = currentAmountOfPower / maxAmountOfPower;
 
-            Debug.Log(currentAmountOfPower);
             yield return new WaitForEndOfFrame();
         }
 

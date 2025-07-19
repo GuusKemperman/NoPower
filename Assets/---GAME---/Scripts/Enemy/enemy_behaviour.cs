@@ -1,20 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.AI; // Required for NavMeshAgent
-
-using System.Collections;
 
 public class enemy_behaviour : MonoBehaviour
 {
     public Transform player;
     public GameObject playerOb;
     public GameObject hitfx;
-    UnityEngine.AI.NavMeshAgent agent;
+    public UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
     public float AttackRadius = 10;
 
+    [SerializeField]
+    AudioSource attackVoiceLineAudioSource;
 
+    [SerializeField]
+    List<AudioClip> attackAudioClips = new List<AudioClip>();
+
+    [SerializeField]
+    AudioSource attackImpactAudioSource;
+
+    [SerializeField]
+    List<AudioClip> attackImpactAudioClips = new List<AudioClip>();
+
+    public int Damage = 1;
+    public int Health = 1;
+    
     [SerializeField] float damageToPlayer = 3;
 
     private enum State
@@ -75,25 +89,40 @@ public class enemy_behaviour : MonoBehaviour
         {
             enemyMeshObject.GetComponent<Animator>().SetTrigger("Attack");
             AttackTimer = AttackInterval;
-            StartCoroutine(Damage());
+            StartCoroutine(DealDamage());
 
         }
     }
 
 
-    IEnumerator Damage()
+    IEnumerator DealDamage()
     {
         yield return new WaitForSeconds(attackDelay);
         if (currentState == State.Attacking)
         {
-            player.GetComponent<PlayerHealth>().ChangeHealth(-3);
+            if (player.GetComponent<PlayerHealth>().ChangeHealth(-1*Damage))
+            {
+                attackVoiceLineAudioSource.clip = attackAudioClips[Random.Range(0, attackAudioClips.Count)];
+                attackVoiceLineAudioSource.Play();
 
-            Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
-            Instantiate(hitfx, hitlocation, transform.rotation);
-            Debug.Log("Attacked");
+                attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
+                attackImpactAudioSource.Play();
+
+                Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
+                Instantiate(hitfx, hitlocation, transform.rotation);
+                Debug.Log("Attacked");
+            }
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
 

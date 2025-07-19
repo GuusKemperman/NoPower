@@ -2384,7 +2384,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   invincibilityTimeActive: 1
-  playerCollider: {fileID: 0}
 --- !u!114 &3947017091745473002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,7 +2414,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   turretPrefab: {fileID: 749312139498176331, guid: c06a0d89e6097da489b6d0837abbbde1, type: 3}
-  spawnCost: 25
+  spawnCost: 80
 --- !u!114 &4794749260939716244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2432,6 +2431,51 @@ MonoBehaviour:
   spawnInterval: 0.2
   enemyPrefab: {fileID: 8000909897425623591, guid: 8c8553062ce54d543a492c80154df312, type: 3}
   maxEnemiesActive: 40
+  stats:
+  - TimePassage: 15
+    Health: 2
+    Damage: 1
+    MovementSpeed: 2
+  - TimePassage: 30
+    Health: 3
+    Damage: 2
+    MovementSpeed: 3
+  - TimePassage: 60
+    Health: 4
+    Damage: 3
+    MovementSpeed: 4
+  - TimePassage: 90
+    Health: 5
+    Damage: 3
+    MovementSpeed: 4
+  - TimePassage: 150
+    Health: 6
+    Damage: 3
+    MovementSpeed: 5
+  intervalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: -0.007272728
+      outSlope: -0.007272728
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 660
+      value: 0.2
+      inSlope: -0.007272728
+      outSlope: -0.007272728
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8269647685206427098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2745,7 +2789,7 @@ PrefabInstance:
       objectReference: {fileID: 6965301066652638189, guid: e70cfc8746c30df4782c560676f80218, type: 3}
     - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
       propertyPath: updateInterval
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
       propertyPath: generationRadius
