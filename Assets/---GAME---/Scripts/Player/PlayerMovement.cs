@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
@@ -22,9 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Plane rotationPlane = new(Vector3.up, Vector3.zero);
     private Camera camera;
+    private CharacterController characterController = null;
     public float Speed => speed;
-
-    public Vector3 velocity = Vector3.zero;
 
     [SerializeField]
     float distancePerFootStep = .5f;
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         camera = Camera.main;
         rotationPlane = new(Vector3.up, Vector3.zero);
+        characterController = GetComponent<CharacterController>();
     }
 
     private void Update()
@@ -53,22 +54,14 @@ public class PlayerMovement : MonoBehaviour
         input.x = input2d.x;
         input.z = input2d.y;
 
-        if (input.magnitude > 1)
-        {
-            input.Normalize();
-        }
+        Vector3 prevPos = characterController.transform.position;
 
-        velocity = input * speed;
+        characterController.Move(input * Time.deltaTime * speed);
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
-        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        Vector3 currPos = characterController.transform.position;
 
-        Vector3 prevPos = transform.transform.position;
-        Vector3 nextPos = transform.position + input * Time.deltaTime * speed;
-        nextPos.y = 0;
-        transform.position = nextPos;
-
-        footstepsDistancePending += Vector3.Distance(prevPos, nextPos);
+        footstepsDistancePending += Vector3.Distance(prevPos, currPos);
         
         while (footstepsDistancePending > 0)
         {
