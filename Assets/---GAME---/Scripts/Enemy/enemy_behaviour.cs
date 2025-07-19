@@ -9,6 +9,10 @@ public class enemy_behaviour : MonoBehaviour
     UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
     public float AttackRadius = 10;
+
+
+    [SerializeField] float damageToPlayer = 3;
+
     private enum State
     {
         Walking,
