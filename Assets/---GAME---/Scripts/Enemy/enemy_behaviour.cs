@@ -2,12 +2,15 @@ using UnityEngine;
 using UnityEngine;
 using UnityEngine.AI; // Required for NavMeshAgent
 
+using System.Collections;
+
 public class enemy_behaviour : MonoBehaviour
 {
     public Transform player;
     public GameObject playerOb;
     UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
+    public float attackDelay = 0.2f;
     public float AttackRadius = 10;
 
 
@@ -71,10 +74,22 @@ public class enemy_behaviour : MonoBehaviour
         {
             enemyMeshObject.GetComponent<Animator>().SetTrigger("Attack");
             AttackTimer = AttackInterval;
-            player.GetComponent<PlayerHealth>().ChangeHealth(-3);
+            StartCoroutine(Damage());
             Debug.Log("Attacked");
         }
     }
 
 
+    IEnumerator Damage()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        if (currentState == State.Attacking)
+        {
+            player.GetComponent<PlayerHealth>().ChangeHealth(-3);
+        }
+    }
+
 }
+
+
+
