@@ -201,12 +201,17 @@ public class Lighting_ChainShot : MonoBehaviour
         List<ChainLine> open = new List<ChainLine>();
         List<ChainLine> closed = new List<ChainLine>();
 
-        float totalLength = minRayLength;
+        float totalLength = 0;
 
         {
             Vector2 start = new Vector2(transform.position.x, transform.position.z); 
-            Vector2 end = start + new Vector2(transform.forward.x, transform.forward.z) * .1f; 
-            open.Add(new ChainLine(start, end));
+            Vector2 delta = new Vector2(transform.forward.x, transform.forward.z) * .1f;
+
+            totalLength = minRayLength * 3;
+
+            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, -5f)));
+            open.Add(new ChainLine(start, start + delta));
+            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta,  5)));
         }
 
         while (open.Count > 0 && totalLength < maxTravelDist)
