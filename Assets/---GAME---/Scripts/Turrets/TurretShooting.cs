@@ -8,6 +8,7 @@ public class TurretShooting : MonoBehaviour
     [SerializeField] private float fireRate = 1.0f;
     [SerializeField] private GameObject projectile = null;
     [SerializeField] private GameObject shotPoint = null;
+    [SerializeField] private int damage = 1;
     
     private TurretTarget closestTarget;
     private float shotTimer = 0.0f;
@@ -40,7 +41,8 @@ public class TurretShooting : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(projectile, shotPoint.transform.position, transform.rotation);
+        GameObject spawned =Instantiate(projectile, shotPoint.transform.position, transform.rotation);
+        spawned.GetComponent<Projectile>().Damage = damage;
     }
 
     private void HandleAiming()
