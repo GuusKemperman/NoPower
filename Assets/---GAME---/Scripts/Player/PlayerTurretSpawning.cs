@@ -1,20 +1,29 @@
 using DependencyInjection;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerTurretSpawning : MonoBehaviour
+public class PlayerTurretSpawning : MonoBehaviour, IDependencyProvider
 {
     [Inject] private PowerManager powerManager = null;
 
     [SerializeField]
     InputAction placeTurretAction;
-
+    
     [SerializeField]
     GameObject turretPrefab;
 
     [SerializeField]
     int spawnCost = 25;
 
+    public int SpawnCost => spawnCost;
+
+    [DependencyInjection.Provide]
+    public PlayerTurretSpawning Provide()
+    {
+        return this;
+    }
+    
     void Start()
     {
         Debug.Log("Test test");
