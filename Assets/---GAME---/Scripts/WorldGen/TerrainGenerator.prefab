@@ -57,3 +57,9 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: ec1b157e69462254f94dd6937be9d0c9, type: 3}
   - {fileID: 919132149155446097, guid: 7ac509699a9acd3478b60a8569c16921, type: 3}
   - {fileID: 919132149155446097, guid: 224784f3650e9c644bc4ff454ad46ff5, type: 3}
+  reactorPrefab: {fileID: 8520493086823530414, guid: cb2d44e9b72be8340a1affd685a33231, type: 3}
+  initialReactorDistance: 10
+  reactorDistanceIncrease: 60
+  numReactorsPerCircumference: 0.025
+  minDistanceBetweenReactorsInSameLayer: 20
+  numReactorsPerCircumferenceDistanceFactor: 0.9
