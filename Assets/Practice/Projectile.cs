@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     float timeAliveRemaining = 30f;
 
+    public int Damage = 1;
+
     // Update is called once per frame
     void Update()
     {
@@ -23,7 +25,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        enemy_behaviour enemyBehaviour = other.gameObject.GetComponent<enemy_behaviour>();
+        if (!enemyBehaviour) return;
+        enemyBehaviour.TakeDamage(Damage);
         Destroy(gameObject);
     }
 }

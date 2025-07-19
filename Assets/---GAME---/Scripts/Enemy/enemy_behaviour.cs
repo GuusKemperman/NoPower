@@ -95,6 +95,14 @@ public class enemy_behaviour : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
 
