@@ -1,21 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
+using static Unity.Cinemachine.IInputAxisOwner.AxisDescriptor;
 
 public class Lighting_EnemyDetector : MonoBehaviour
 {
     List<GameObject> EnemiesInRange = new List<GameObject>();
-    public List<GameObject> GetEnemiesInRange()
-    {
-        return EnemiesInRange;
-    }
+    public List<GameObject> GetEnemiesInRange() { return EnemiesInRange; }
 
     public GameObject FindClosestEnemy()
     {
         if (EnemiesInRange.Count > 0)
         {
             GameObject ClosestEnemy = null;
-            float ClosestDistanceSquare = -1.0f;
+            float ClosestDistanceSquare = 999999999.0f;
             Vector3 CurrentPosition = transform.position;
 
             foreach (GameObject CurrentEnemy in EnemiesInRange)
@@ -37,7 +36,7 @@ public class Lighting_EnemyDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider OtherCollider)
     {
-        if (OtherCollider.CompareTag("enemies")
+        if (OtherCollider.CompareTag("enemy")
             && !EnemiesInRange.Contains(OtherCollider.gameObject))
         {
             EnemiesInRange.Add(OtherCollider.gameObject);
@@ -46,7 +45,7 @@ public class Lighting_EnemyDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider OtherCollider)
     {
-        if (OtherCollider.CompareTag("enemies")
+        if (OtherCollider.CompareTag("enemy")
             && EnemiesInRange.Contains(OtherCollider.gameObject))
         {
             EnemiesInRange.Remove(OtherCollider.gameObject);

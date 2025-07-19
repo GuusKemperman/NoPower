@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         velocity = input * speed;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
         Vector3 prevPos = transform.transform.position;
         Vector3 nextPos = transform.position + input * Time.deltaTime * speed;
