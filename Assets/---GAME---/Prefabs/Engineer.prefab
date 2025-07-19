@@ -2228,6 +2228,8 @@ GameObject:
   - component: {fileID: 8932948380695716933}
   - component: {fileID: 97694275907845916}
   - component: {fileID: 3947017091745473002}
+  - component: {fileID: 7146735427356298290}
+  - component: {fileID: 5956988588762640635}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -2413,6 +2415,35 @@ MonoBehaviour:
     m_Flags: 0
   turretPrefab: {fileID: 749312139498176331, guid: c06a0d89e6097da489b6d0837abbbde1, type: 3}
   spawnCost: 25
+--- !u!114 &7146735427356298290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799730976438632927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa94c4a79e4af514f93f3597431de7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionMap: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  PlayerTransform: {fileID: 3713270173221604753}
+  PlayerEnemyDetector: {fileID: 5956988588762640635}
+  LineRendererPrefab: {fileID: 4302184665070858957, guid: e775a6b963272424ea3ecc5e5d10dffc, type: 3}
+  RefreshRate: 0.016666668
+--- !u!114 &5956988588762640635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799730976438632927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83cad70087e2855448cd1a65569a2a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8269647685206427098
 GameObject:
   m_ObjectHideFlags: 0

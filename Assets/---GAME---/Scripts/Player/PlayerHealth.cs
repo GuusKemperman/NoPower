@@ -21,13 +21,13 @@ public class PlayerHealth : MonoBehaviour, IDependencyProvider
         SetHealth(maxHealth);
     }
 
-    void SetHealth(int health)
+    public void SetHealth(int health)
     {
         currentHealth = health;
         OnHealthChanged?.Invoke(currentHealth);
     }
 
-    void ChangeHealth(int delta)
+    public void ChangeHealth(int delta)
     {
         currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
         OnHealthChanged?.Invoke(currentHealth);

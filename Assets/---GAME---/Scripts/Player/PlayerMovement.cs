@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         HandleRotationMouse();
+
+
+
     }
 
     private void HandleMovement()
