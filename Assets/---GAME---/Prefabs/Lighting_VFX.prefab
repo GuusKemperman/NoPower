@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9184329890594369184}
   - component: {fileID: 5251709859869380590}
   m_Layer: 0
-  m_Name: Lighting
+  m_Name: Lighting_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

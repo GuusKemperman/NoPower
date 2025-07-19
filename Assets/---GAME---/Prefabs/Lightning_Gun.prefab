@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6466333580439239782}
   - component: {fileID: 3151693103933022003}
   - component: {fileID: -6029600064199955128}
+  - component: {fileID: 5016384702814796506}
   m_Layer: 0
-  m_Name: Lighting_Gun
+  m_Name: Lightning_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83cad70087e2855448cd1a65569a2a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RefreshRate: 0.25
-  MySphereCollider: {fileID: 0}
 --- !u!135 &-6029600064199955128
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -68,3 +67,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5016384702814796506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345871247212747737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa94c4a79e4af514f93f3597431de7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActionMap: {fileID: 0}
+  PlayerTransform: {fileID: 0}
+  PlayerEnemyDetector: {fileID: 0}
+  LineRendererPrefab: {fileID: 0}
+  RefreshRate: 0.016666668
