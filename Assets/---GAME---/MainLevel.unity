@@ -973,6 +973,10 @@ PrefabInstance:
       propertyPath: updateInterval
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5551923840644114725, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: generationRadius
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7799730976438632927, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: m_Name
       value: Engineer
