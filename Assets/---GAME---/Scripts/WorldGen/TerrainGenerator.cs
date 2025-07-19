@@ -50,6 +50,26 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     [SerializeField]
     List<GameObject> decoration = new List<GameObject>();
 
+    [SerializeField]
+    GameObject reactorPrefab = null;
+
+    [SerializeField]
+    float initialReactorDistance = 10f;
+
+    [SerializeField]
+    float reactorDistanceIncrease = 30f;
+
+    [SerializeField]
+    float numReactorsPerCircumference = .8f;
+
+    [SerializeField]
+    float minDistanceBetweenReactorsInSameLayer = 20f;
+
+    [SerializeField]
+    float numReactorsPerCircumferenceDistanceFactor = .9f;
+
+    float currentlySpawnedReactorsAtDistance = 0;
+
     Vector2 CellToWorld(Vector2Int cellPos)
     {
         return new Vector2((float)cellPos.x * chunkSize, (float)cellPos.y * chunkSize);
@@ -59,6 +79,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     void Start()
     {
         StartCoroutine(UpdateTerrain());
+        StartCoroutine(SpawnReactors());
     }
 
     IEnumerator UpdateTerrain()
@@ -152,6 +173,58 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                 }
             }
 
+            yield return new WaitForSeconds(updateInterval);
+        }
+    }
+
+    IEnumerator SpawnReactors()
+    {
+        while (true)
+        {
+            float playerDist = player.transform.position.magnitude;
+            float maxDistToSpawn = playerDist + generationRadius;
+            float circumFactor = 1.0f;
+
+            for (float currentDist = initialReactorDistance;
+                currentDist <= maxDistToSpawn; 
+                currentDist += reactorDistanceIncrease)
+            {
+                circumFactor *= numReactorsPerCircumferenceDistanceFactor;
+
+                if (currentDist > currentlySpawnedReactorsAtDistance)
+                {
+                    float cirumferenceHere = currentDist * 2.0f * MathF.PI * circumFactor;
+                    int numToSpawn = (int)MathF.Ceiling(numReactorsPerCircumference * cirumferenceHere);
+
+                    List<Vector3> alreadySpawnedPrefabs = new List<Vector3>();
+
+                    for (int i = 0; i < numToSpawn; i++)
+                    {
+                        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2);
+                        Vector3 spawnPos = new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
+                        spawnPos *= currentDist;
+
+                        bool invalid = false;
+
+                        foreach (Vector3 pos in alreadySpawnedPrefabs)
+                        {
+                            if (Vector3.Distance(pos, spawnPos) < minDistanceBetweenReactorsInSameLayer)
+                            {
+                                invalid = true;
+                                break;
+                            }
+                        }
+
+                        if (!invalid)
+                        {
+                            Instantiate(reactorPrefab, spawnPos, Quaternion.Euler(0.0f, UnityEngine.Random.Range(0f, 360f), 0.0f));
+                            alreadySpawnedPrefabs.Add(spawnPos);
+                        }
+                    }
+                }
+            }
+
+            currentlySpawnedReactorsAtDistance = maxDistToSpawn;
             yield return new WaitForSeconds(updateInterval);
         }
     }
