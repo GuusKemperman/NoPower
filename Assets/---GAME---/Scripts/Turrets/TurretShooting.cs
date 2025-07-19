@@ -8,11 +8,11 @@ public class TurretShooting : MonoBehaviour
     [SerializeField] private float fireRate = 1.0f;
     [SerializeField] private GameObject projectile = null;
     [SerializeField] private GameObject shotPoint = null;
-
-    public bool Activated = false;
     
     private TurretTarget closestTarget;
     private float shotTimer = 0.0f;
+
+    public bool active = false;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class TurretShooting : MonoBehaviour
 
     private void Update()
     {
-        if (!Activated) return;
+        if (!active) return;
         closestTarget = FindClosestTarget();
         HandleAiming();
         HandleShooting();
