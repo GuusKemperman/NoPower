@@ -148,11 +148,15 @@ public class Lighting_ChainShot : MonoBehaviour
 
         float totalLength = minRayLength;
         open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
         
         while (open.Count > 0 && totalLength < maxTravelDist)
         {
-            ChainLine curr = open[open.Count - 1];
-            open.RemoveAt(open.Count - 1);
+            ChainLine curr = open[0];
+            open.RemoveAt(0);
 
             float dist = (curr.end - curr.start).magnitude;
             float splitChance = splitChancePerLength * dist;
