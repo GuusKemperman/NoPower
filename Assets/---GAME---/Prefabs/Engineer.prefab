@@ -2861,21 +2861,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
     - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
-      propertyPath: maxRayLength
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
-      propertyPath: minRayLength
+      propertyPath: lineDuration
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
+      propertyPath: maxRayLength
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
+      propertyPath: minRayLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
       propertyPath: maxTravelDist
-      value: 2000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
       propertyPath: PlayerTransform
       value: 
       objectReference: {fileID: 3713270173221604753}
+    - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
+      propertyPath: snapToEnemyRadius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
       propertyPath: LineRendererPrefab
       value: 
@@ -2884,6 +2892,10 @@ PrefabInstance:
       propertyPath: PlayerEnemyDetector
       value: 
       objectReference: {fileID: 3429183332838955022}
+    - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
+      propertyPath: splitChancePerLength
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5016384702814796506, guid: 0ee73128ae8aff34593012c6b39974a2, type: 3}
       propertyPath: splittingDeviationAngle
       value: 20

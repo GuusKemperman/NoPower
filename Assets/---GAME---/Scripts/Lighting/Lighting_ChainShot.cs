@@ -26,7 +26,9 @@ public class Lighting_ChainShot : MonoBehaviour
 
     [SerializeField] int damageAmount = 10;
 
-    GameObject spawnedLiner = null;
+    [SerializeField] float lineDuration = 1;
+
+    List<GameObject> spawnedLiners = new List<GameObject>();
 
     public static event Action HitEnemy;
     
@@ -64,6 +66,26 @@ public class Lighting_ChainShot : MonoBehaviour
         float sinTheta = Mathf.Sin(angle * Mathf.Deg2Rad);
         return new UnityEngine.Vector2(vec.x * cosTheta - vec.y * sinTheta,
                 vec.x * sinTheta + vec.y * cosTheta);
+    }
+
+    private void OnDestroy()
+    {
+        ClearLines();
+    }
+
+    IEnumerator ClearLinesAfterDelay()
+    {
+        yield return new WaitForSeconds(lineDuration);
+        ClearLines();
+    }
+
+    void ClearLines()
+    {
+        foreach (GameObject obj in spawnedLiners)
+        {
+            Destroy(obj);
+        }
+        spawnedLiners.Clear();
     }
 
     // -----------
@@ -165,24 +187,12 @@ public class Lighting_ChainShot : MonoBehaviour
         {
             Vector3 start = new Vector3(line.start.x, .1f, line.start.y);
             Vector3 end = new Vector3(line.end.x, .1f, line.end.y);
-
-            spawnedLiner = Instantiate(LineRendererPrefab);
+            GameObject spawnedLiner = Instantiate(LineRendererPrefab);
             LineRenderer ren = spawnedLiner.GetComponent<LineRenderer>();
             ren.positionCount = 2;
             ren.SetPosition(0, start);
             ren.SetPosition(1, end);
-        }
-    }
-
-    void SpawnLineRenderers(List<ChainLine> list)
-    {
-        foreach (ChainLine line in list)
-        {
-            GameObject NewLine = Instantiate(LineRendererPrefab);
-
-            Debug.DrawLine(new Vector3(line.start.x, .1f, line.start.y),
-                new Vector3(line.end.x, .1f, line.end.y),
-                 Color.blue, 10000.0f, false);
+            spawnedLiners.Add(spawnedLiner);
         }
     }
 
@@ -192,6 +202,7 @@ public class Lighting_ChainShot : MonoBehaviour
 
     private void StartShooting()
     {
+        ClearLines();
         List<ChainLine> open = new List<ChainLine>();
         List<ChainLine> closed = new List<ChainLine>();
 
@@ -261,6 +272,7 @@ public class Lighting_ChainShot : MonoBehaviour
         Draw(open);
         Draw(closed);
 
+        StartCoroutine(ClearLinesAfterDelay());
 
         //if (AreAllNonNull(PlayerTransform, PlayerEnemyDetector, LineRendererPrefab))
         //{
