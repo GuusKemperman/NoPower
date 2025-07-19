@@ -53,8 +53,13 @@ MonoBehaviour:
   player: {fileID: 0}
   playerOb: {fileID: 0}
   hitfx: {fileID: 62011511148764793, guid: ab3478f494f9a744aa695d8a27717c5c, type: 3}
+  takeDamageFX: {fileID: 8952325000492440084, guid: 2703abe9f00e5c3469e76b09f0942359, type: 3}
   agent: {fileID: 0}
   enemyMeshObject: {fileID: 1090972848769902366}
+  onHitSFX:
+  - {fileID: 8300000, guid: 0f01973eb7787b647b5c9f565a390386, type: 3}
+  - {fileID: 8300000, guid: ea1cbbe2f9af3a841a1e3a34928e30c3, type: 3}
+  - {fileID: 8300000, guid: f09da8346b2b6b54e9b0ef3180a60e02, type: 3}
   attackDelay: 0.5
   AttackRadius: 2
   attackVoiceLineAudioSource: {fileID: 2689122173499020516}

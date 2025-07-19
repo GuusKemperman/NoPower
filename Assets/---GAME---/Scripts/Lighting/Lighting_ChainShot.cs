@@ -12,6 +12,8 @@ public class Lighting_ChainShot : MonoBehaviour
 
     [SerializeField] GameObject LineRendererPrefab = null;
 
+    [SerializeField] private GameObject Particles;
+
     [SerializeField] float minRayLength = 1.0f;
     [SerializeField] float maxRayLength = 3.0f;
 
@@ -26,8 +28,9 @@ public class Lighting_ChainShot : MonoBehaviour
 
     [SerializeField] int damageAmount = 10;
 
-    [SerializeField] float lineDuration = 1;
+    [SerializeField] float lineDuration = 0.4f;
 
+    Queue<GameObject> myQueue = new Queue<GameObject>();
     List<GameObject> spawnedLiners = new List<GameObject>();
 
     public static event Action HitEnemy;
@@ -76,16 +79,28 @@ public class Lighting_ChainShot : MonoBehaviour
     IEnumerator ClearLinesAfterDelay()
     {
         yield return new WaitForSeconds(lineDuration);
-        ClearLines();
+        StartCoroutine(ClearLines());
     }
 
-    void ClearLines()
+    IEnumerator ClearLines()
     {
-        foreach (GameObject obj in spawnedLiners)
+
+        while (true)
         {
-            Destroy(obj);
+            for (int i =0; i < 3; i++){ 
+                if (myQueue.Count > 0) 
+                {
+                    Destroy(myQueue.Dequeue());
+                }
+                else
+                {
+                    yield break; 
+                }
+            }
+
+            yield return new WaitForSeconds(0.01f);
         }
-        spawnedLiners.Clear();
+
     }
 
     // -----------
@@ -181,22 +196,42 @@ public class Lighting_ChainShot : MonoBehaviour
         }
     }
 
+    Quaternion RotationFromTwoPositions(Vector3 startPos, Vector3 endPos)
+    {
+        Vector3 direction = endPos - startPos;
+
+        // Handle the case where positions are the same to avoid zero direction
+        if (direction == Vector3.zero)
+            return Quaternion.identity;
+
+        // Create a rotation looking toward the direction vector
+        return Quaternion.LookRotation(direction);
+    }
+
     void Draw(List<ChainLine> list)
     {
         foreach (ChainLine line in list)
         {
             Vector3 start = new Vector3(line.start.x, .1f, line.start.y);
+            
             Vector3 end = new Vector3(line.end.x, .1f, line.end.y);
             GameObject spawnedLiner = Instantiate(LineRendererPrefab);
             LineRenderer ren = spawnedLiner.GetComponent<LineRenderer>();
             ren.positionCount = 2;
-            ren.SetPosition(0, start);
-            ren.SetPosition(1, end);
-            spawnedLiners.Add(spawnedLiner);
+            ren.SetPosition(1, start);
+            ren.SetPosition(0, end);
+            myQueue.Enqueue(spawnedLiner);
+
+            float rand = Random.value; // random number between 0 and 1
+            if (rand < 0.1)
+            {
+                
+                Instantiate(Particles, end, RotationFromTwoPositions(start, end));
+
+            }
         }
     }
-
-    // -----------
+// -----------
     // Shooting Functions
     // -----------
 

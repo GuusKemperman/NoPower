@@ -19,12 +19,16 @@ public class enemy_behaviour : MonoBehaviour
     public Transform player;
     public GameObject playerOb;
     public GameObject hitfx;
+    public GameObject takeDamageFX;
     public UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
-    public float attackDelay = 0.2f;
+public float attackDelay = 0.2f;
     public float AttackRadius = 10;
     public static event Action<enemy_behaviour> EnemyDied;
+
+
     
+
     [SerializeField]
     AudioSource attackVoiceLineAudioSource;
 
@@ -51,6 +55,7 @@ public class enemy_behaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
@@ -132,6 +137,9 @@ public class enemy_behaviour : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
+        Instantiate(takeDamageFX, transform.position, transform.rotation);
+
+
 
         foreach (SkinnedMeshRenderer meshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
