@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3090680238539288866}
+  - component: {fileID: 6420062706737891085}
   m_Layer: 0
   m_Name: TerrainGenerator
   m_TagString: Untagged
@@ -31,3 +32,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6420062706737891085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539005760591940317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49c271017ee0b949acd6c11918bc871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateInterval: 10
+  objectDensity: 0.06
+  maxNonYRotation: 10
+  heightOffset: -0.2
+  maxScaleDeviation: 0.3
+  chunkSize: 32
+  generationRadius: 100
+  chunkGround: {fileID: 1477086196780268976, guid: d3fd08a17caf5094aba4156ec79f2237, type: 3}
+  decoration:
+  - {fileID: 919132149155446097, guid: 60978cdeb7c48394ab5a17084122d378, type: 3}
+  - {fileID: 919132149155446097, guid: ec1b157e69462254f94dd6937be9d0c9, type: 3}
+  - {fileID: 919132149155446097, guid: 7ac509699a9acd3478b60a8569c16921, type: 3}
+  - {fileID: 919132149155446097, guid: 224784f3650e9c644bc4ff454ad46ff5, type: 3}
