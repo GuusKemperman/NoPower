@@ -1,5 +1,6 @@
 using DependencyInjection;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -21,6 +22,9 @@ public class Reactor : BaseInteractable
     Light reactorLight = null;
 
     float intensityLight = 0;
+
+    [SerializeField]
+    AudioSource hummingSource;
 
     public override void Interact() 
     {
@@ -64,11 +68,13 @@ public class Reactor : BaseInteractable
         while (currentAmountOfPower < maxAmountOfPower)
         {
             currentAmountOfPower += amountPerSecond * Time.deltaTime;
+            hummingSource.volume = currentAmountOfPower / maxAmountOfPower;
 
             Debug.Log(currentAmountOfPower);
             yield return new WaitForEndOfFrame();
         }
 
+        hummingSource.volume = 1;
         reactorLight.intensity = intensityLight;
         currentAmountOfPower = maxAmountOfPower;
         rechargeTime *= 2;
