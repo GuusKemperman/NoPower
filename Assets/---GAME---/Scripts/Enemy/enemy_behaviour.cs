@@ -1,8 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine;
 using UnityEngine.AI; // Required for NavMeshAgent
-
-using System.Collections;
 
 public class enemy_behaviour : MonoBehaviour
 {
@@ -13,6 +13,19 @@ public class enemy_behaviour : MonoBehaviour
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
     public float AttackRadius = 10;
+
+    [SerializeField]
+    AudioSource attackVoiceLineAudioSource;
+
+    [SerializeField]
+    List<AudioClip> attackAudioClips = new List<AudioClip>();
+
+    [SerializeField]
+    AudioSource attackImpactAudioSource;
+
+    [SerializeField]
+    List<AudioClip> attackImpactAudioClips = new List<AudioClip>();
+
     public int Damage = 1;
     public int Health = 1;
     
@@ -88,6 +101,12 @@ public class enemy_behaviour : MonoBehaviour
         if (currentState == State.Attacking)
         {
             player.GetComponent<PlayerHealth>().ChangeHealth(-1*Damage);
+
+            attackVoiceLineAudioSource.clip = attackAudioClips[Random.Range(0, attackAudioClips.Count)];
+            attackVoiceLineAudioSource.Play();
+
+            attackImpactAudioSource.clip = attackImpactAudioClips[Random.Range(0, attackImpactAudioClips.Count)];
+            attackImpactAudioSource.Play();
 
             Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
             Instantiate(hitfx, hitlocation, transform.rotation);
