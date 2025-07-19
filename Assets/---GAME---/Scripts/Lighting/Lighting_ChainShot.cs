@@ -9,10 +9,8 @@ using Random = UnityEngine.Random;
 public class Lighting_ChainShot : MonoBehaviour
 {
     [SerializeField] InputActionAsset ActionMap = null;
-    [SerializeField] Transform PlayerTransform = null;
-    [SerializeField] Lighting_EnemyDetector PlayerEnemyDetector = null;
+
     [SerializeField] GameObject LineRendererPrefab = null;
-    [SerializeField] float RefreshRate = 1.0f / 60.0f;
 
     [SerializeField] float minRayLength = 1.0f;
     [SerializeField] float maxRayLength = 3.0f;
@@ -28,6 +26,8 @@ public class Lighting_ChainShot : MonoBehaviour
 
     [SerializeField] int damageAmount = 10;
 
+    GameObject spawnedLiner = null;
+
     struct ChainLine
     {
         public ChainLine(Vector2 a_start, Vector2 a_end)
@@ -41,8 +41,6 @@ public class Lighting_ChainShot : MonoBehaviour
         public Vector2 end;
         public enemy_behaviour hit;
     }
-
-    List<GameObject> SpawnedLineRenderers = new List<GameObject>();
 
     void Update()
     {
@@ -157,6 +155,21 @@ public class Lighting_ChainShot : MonoBehaviour
         }
     }
 
+    void Draw(List<ChainLine> list)
+    {
+        foreach (ChainLine line in list)
+        {
+            Vector3 start = new Vector3(line.start.x, .1f, line.start.y);
+            Vector3 end = new Vector3(line.end.x, .1f, line.end.y);
+
+            spawnedLiner = Instantiate(LineRendererPrefab);
+            LineRenderer ren = spawnedLiner.GetComponent<LineRenderer>();
+            ren.positionCount = 2;
+            ren.SetPosition(0, start);
+            ren.SetPosition(1, end);
+        }
+    }
+
     void SpawnLineRenderers(List<ChainLine> list)
     {
         foreach (ChainLine line in list)
@@ -179,13 +192,13 @@ public class Lighting_ChainShot : MonoBehaviour
         List<ChainLine> closed = new List<ChainLine>();
 
         float totalLength = minRayLength;
+
         {
             Vector2 start = new Vector2(transform.position.x, transform.position.z); 
             Vector2 end = start + new Vector2(transform.forward.x, transform.forward.z) * .1f; 
             open.Add(new ChainLine(start, end));
         }
 
-        
         while (open.Count > 0 && totalLength < maxTravelDist)
         {
             ChainLine curr = open[0];
@@ -241,12 +254,15 @@ public class Lighting_ChainShot : MonoBehaviour
         DebugDraw(open);
         DebugDraw(closed);
 
+        Draw(open);
+        Draw(closed);
+
 
         //if (AreAllNonNull(PlayerTransform, PlayerEnemyDetector, LineRendererPrefab))
         //{
         //    LineRenderer renderer;
 
-            
+
         //    if (!IsLineRendererSpawned) // Only doing this on the first frame of shooting
         //    {
         //        GameObject NearestEnemy = PlayerEnemyDetector.FindClosestEnemy();
