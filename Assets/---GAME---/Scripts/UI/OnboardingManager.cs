@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,13 +20,15 @@ public class OnboardingManager : MonoBehaviour
         DisplayStep(currentIndex);
         PowerManager.OnGainedPower += SkipFirst;
         PlayerTurretSpawning.OnPlacedTurret += SkipSecond;
+        Lighting_ChainShot.HitEnemy += SkipThird;
     }
     private void OnDestroy()
     {
         PowerManager.OnGainedPower -= SkipFirst;
         PlayerTurretSpawning.OnPlacedTurret -= SkipSecond;
-        
+        Lighting_ChainShot.HitEnemy -= SkipThird;
     }
+    
     private void SkipFirst()
     {
         if (currentIndex != 0) return;
@@ -37,8 +40,23 @@ public class OnboardingManager : MonoBehaviour
     {
         if (currentIndex !=1) return;
         currentIndex++;
-        DisplayStep(currentIndex);    }
+        DisplayStep(currentIndex);
+    }
 
+    private void SkipThird()
+    {
+        if (currentIndex !=2) return;
+        currentIndex++;
+        DisplayStep(currentIndex);
+        StartCoroutine(SkipAfterTime());
+    }
+
+    private IEnumerator SkipAfterTime()
+    {
+        yield return new WaitForSeconds(5.0f);
+        textMesh.gameObject.SetActive(false);
+    }
+    
     private void DisplayStep(int i)
     {
         OnboardingStep currentStep = onboardingSteps[i];

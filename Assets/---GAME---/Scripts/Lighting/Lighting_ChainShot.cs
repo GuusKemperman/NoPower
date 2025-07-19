@@ -28,6 +28,8 @@ public class Lighting_ChainShot : MonoBehaviour
 
     GameObject spawnedLiner = null;
 
+    public static event Action HitEnemy;
+    
     struct ChainLine
     {
         public ChainLine(Vector2 a_start, Vector2 a_end)
@@ -102,7 +104,9 @@ public class Lighting_ChainShot : MonoBehaviour
             }
 
             newEnd = new Vector2(enemy.transform.position.x, enemy.transform.position.y);
+            
             hit = enemy;
+            HitEnemy?.Invoke();
             break;
         }
         var ret = new ChainLine(prevEnd, newEnd);

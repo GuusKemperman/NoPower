@@ -180,36 +180,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5900a38b4c8cc48b2914a0ed9ea711, type: 3}
---- !u!1 &514980884 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7799730976438632927, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-  m_PrefabInstance: {fileID: 1459437804}
-  m_PrefabAsset: {fileID: 0}
---- !u!143 &514980922
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514980884}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 0
-  m_StepOffset: 0
-  m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!1 &652967321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,35 +1114,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: maxRayLength
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: minRayLength
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: maxTravelDist
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: splittingDeviationAngle
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7799730976438632927, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: m_Name
       value: Engineer
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1307193937402183713, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-    - {fileID: 6161663324146194376, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7799730976438632927, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 514980922}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
 --- !u!1 &1465101404
 GameObject:
@@ -1275,6 +1224,8 @@ MonoBehaviour:
   - StepText: Press 'SPACE' to place a turret to defend yourself
   - StepText: Press 'LMB' to attack an enemy in distance, it also costs power to
       attack them
+  - StepText: Survive the longest, replenish your power and defend against enemies!
+      Good luck!
   textMesh: {fileID: 811152441}
 --- !u!1 &1749957989
 GameObject:
