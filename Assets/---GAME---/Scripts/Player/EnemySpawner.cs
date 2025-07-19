@@ -12,7 +12,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     GameObject enemyPrefab;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField]
+    int maxEnemiesActive = 40;
+
+    
     void Start()
     {
         StartCoroutine(SpawnCycle());
@@ -28,7 +31,17 @@ public class EnemySpawner : MonoBehaviour
             spawnPos.x += transform.position.x;
             spawnPos.z += transform.position.z;
 
-            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            int enemyCount = GameObject.FindGameObjectsWithTag("enemy").Length;
+
+            if (true)
+            {
+                if (enemyCount < maxEnemiesActive)
+                {
+                    GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                    enemy.GetComponent<enemy_behaviour>().player = transform;
+                }
+            }
+            
             yield return new WaitForSeconds(spawnInterval);
         }
     }
