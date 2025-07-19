@@ -1003,6 +1003,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: maxRayLength
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: minRayLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: maxTravelDist
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: splittingDeviationAngle
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7799730976438632927, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: m_Name
       value: Engineer
