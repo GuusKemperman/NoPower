@@ -8,6 +8,7 @@ public class enemy_behaviour : MonoBehaviour
 {
     public Transform player;
     public GameObject playerOb;
+    public GameObject hitfx;
     UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
@@ -75,7 +76,7 @@ public class enemy_behaviour : MonoBehaviour
             enemyMeshObject.GetComponent<Animator>().SetTrigger("Attack");
             AttackTimer = AttackInterval;
             StartCoroutine(Damage());
-            Debug.Log("Attacked");
+
         }
     }
 
@@ -86,6 +87,10 @@ public class enemy_behaviour : MonoBehaviour
         if (currentState == State.Attacking)
         {
             player.GetComponent<PlayerHealth>().ChangeHealth(-3);
+
+            Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.1f);
+            Instantiate(hitfx, hitlocation, transform.rotation);
+            Debug.Log("Attacked");
         }
     }
 
