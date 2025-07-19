@@ -1512,10 +1512,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5551923840644114725, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: updateInterval
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5551923840644114725, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: generationRadius
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551923840644114725, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: reactorDistanceIncrease
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551923840644114725, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: minDistanceBetweenReactorsInSameLayer
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5760119128094708170, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
@@ -1536,6 +1544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8436697262657895902, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+    - {fileID: 8797442865533209359, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

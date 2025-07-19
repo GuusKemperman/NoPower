@@ -2229,8 +2229,8 @@ GameObject:
   - component: {fileID: 3947017091745473002}
   - component: {fileID: 4794749260939716244}
   - component: {fileID: 4064658328218382523}
-  - component: {fileID: 8797442865533209359}
-  - component: {fileID: 5862405361269630779}
+  - component: {fileID: 7502509584820340083}
+  - component: {fileID: 6397345382265107379}
   m_Layer: 0
   m_Name: Engineer
   m_TagString: Untagged
@@ -2564,14 +2564,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!136 &8797442865533209359
+--- !u!136 &7502509584820340083
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7799730976438632927}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1ca4d520d5062a2438995a21fc1661fb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2587,7 +2587,7 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
---- !u!54 &5862405361269630779
+--- !u!54 &6397345382265107379
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2608,9 +2608,9 @@ Rigidbody:
     serializedVersion: 2
     m_Bits: 0
   m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitTensor: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
@@ -2927,11 +2927,15 @@ PrefabInstance:
       objectReference: {fileID: 6965301066652638189, guid: e70cfc8746c30df4782c560676f80218, type: 3}
     - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
       propertyPath: updateInterval
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
       propertyPath: generationRadius
-      value: 20
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: reactorDistanceIncrease
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
       propertyPath: 'decoration.Array.data[0]'
