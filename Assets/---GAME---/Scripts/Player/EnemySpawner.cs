@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine(SpawnCycle());
     }
+    
 
     IEnumerator SpawnCycle()
     {
@@ -39,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
                     enemy.GetComponent<enemy_behaviour>().player = transform;
+                    enemy.GetComponent<enemy_behaviour>().playerOb = gameObject;
                 }
             }
             

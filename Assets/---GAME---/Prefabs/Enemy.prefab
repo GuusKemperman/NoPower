@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  playerOb: {fileID: 0}
   enemyMeshObject: {fileID: 1090972848769902366}
+  AttackRadius: 2
+  AttackInterval: 0.5
 --- !u!195 &4235758654085743607
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -86,7 +89,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

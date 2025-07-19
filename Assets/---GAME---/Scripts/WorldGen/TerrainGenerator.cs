@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyProvider
@@ -46,6 +47,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
 
     [SerializeField]
     GameObject chunkGround = null;
+
 
     [SerializeField]
     List<GameObject> decoration = new List<GameObject>();
@@ -218,6 +220,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                         if (!invalid)
                         {
                             Instantiate(reactorPrefab, spawnPos, Quaternion.Euler(0.0f, UnityEngine.Random.Range(0f, 360f), 0.0f));
+
                             alreadySpawnedPrefabs.Add(spawnPos);
                         }
                     }
