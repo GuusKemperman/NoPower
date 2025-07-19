@@ -20,6 +20,6 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        animator.SetFloat(movementAnim, controller.velocity.magnitude / playerMovement.Speed);
+        animator.SetFloat(movementAnim, playerMovement.Velocity.magnitude);
     }
 }

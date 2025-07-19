@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     float footstepsDistancePending = 0;
 
+    public Vector3 Velocity = Vector3.zero;
+
     private void Start()
     {
         camera = Camera.main;
@@ -53,7 +55,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 input = default;
         input.x = input2d.x;
         input.z = input2d.y;
-
+        
+        Velocity = input;
+        
         Vector3 prevPos = characterController.transform.position;
 
         characterController.Move(input * Time.deltaTime * speed);

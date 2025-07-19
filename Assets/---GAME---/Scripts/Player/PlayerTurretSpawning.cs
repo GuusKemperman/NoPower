@@ -1,3 +1,4 @@
+using System;
 using DependencyInjection;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class PlayerTurretSpawning : MonoBehaviour, IDependencyProvider
     int spawnCost = 25;
 
     public int SpawnCost => spawnCost;
+    public static event Action OnPlacedTurret;
 
     [DependencyInjection.Provide]
     public PlayerTurretSpawning Provide()
@@ -42,5 +44,6 @@ public class PlayerTurretSpawning : MonoBehaviour, IDependencyProvider
 
         powerManager.ChangePower(-spawnCost);
         Instantiate(turretPrefab, transform.position + new Vector3(0, 100, 0), transform.rotation);
+        OnPlacedTurret?.Invoke();
     }
 }

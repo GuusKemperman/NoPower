@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class Lighting_ChainShot : MonoBehaviour
 {
@@ -177,11 +179,12 @@ public class Lighting_ChainShot : MonoBehaviour
         List<ChainLine> closed = new List<ChainLine>();
 
         float totalLength = minRayLength;
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
+        {
+            Vector2 start = new Vector2(transform.position.x, transform.position.z); 
+            Vector2 end = start + new Vector2(transform.forward.x, transform.forward.z) * .1f; 
+            open.Add(new ChainLine(start, end));
+        }
+
         
         while (open.Count > 0 && totalLength < maxTravelDist)
         {
