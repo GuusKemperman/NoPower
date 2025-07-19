@@ -53,11 +53,6 @@ public class Lighting_ChainShot : MonoBehaviour
         {
             StartShooting();
         }
-
-        if (AttackAction.WasReleasedThisFrame())
-        {
-            StopShooting();
-        }
     }
 
     UnityEngine.Vector2 RotateVec2ByAngle(UnityEngine.Vector2 vec, float angle)
@@ -125,7 +120,7 @@ public class Lighting_ChainShot : MonoBehaviour
                 continue;
             }
 
-            newEnd = new Vector2(enemy.transform.position.x, enemy.transform.position.y);
+            newEnd = new Vector2(enemy.transform.position.x, enemy.transform.position.z);
             
             hit = enemy;
             HitEnemy?.Invoke();
@@ -225,12 +220,14 @@ public class Lighting_ChainShot : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 ChainLine next = GetNewLine(curr.start, curr.end, false);
-                totalLength += (next.start - next.end).magnitude;
 
                 if (next.hit != null)
                 {
+                    totalLength += (next.start - next.end).magnitude;
+
                     next.hit.TakeDamage(damageAmount);
                     closed.Add(next);
+                    break;
                 }
                 else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
                 {
@@ -238,9 +235,11 @@ public class Lighting_ChainShot : MonoBehaviour
                 }
                 else
                 {
+                    totalLength += (next.start - next.end).magnitude;
+
                     open.Add(next);
+                    break;
                 }
-                break;
             }
 
             bool hasSplitter = UnityEngine.Random.Range(0f, 1f) < splitChance;
@@ -250,12 +249,14 @@ public class Lighting_ChainShot : MonoBehaviour
                 for (int i = 0; i < 5; i++)
                 {
                     ChainLine next = GetNewLine(curr.start, curr.end, true);
-                    totalLength += (next.start - next.end).magnitude;
 
                     if (next.hit != null)
                     {
+                        totalLength += (next.start - next.end).magnitude;
+
                         next.hit.TakeDamage(damageAmount);
                         closed.Add(next);
+                        break;
                     }
                     else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
                     {
@@ -263,9 +264,11 @@ public class Lighting_ChainShot : MonoBehaviour
                     }
                     else
                     {
+                        totalLength += (next.start - next.end).magnitude;
+
                         open.Add(next);
+                        break;
                     }
-                    break;
                 }
             }
 
@@ -279,57 +282,5 @@ public class Lighting_ChainShot : MonoBehaviour
         Draw(closed);
 
         StartCoroutine(ClearLinesAfterDelay());
-
-        //if (AreAllNonNull(PlayerTransform, PlayerEnemyDetector, LineRendererPrefab))
-        //{
-        //    LineRenderer renderer;
-
-
-        //    if (!IsLineRendererSpawned) // Only doing this on the first frame of shooting
-        //    {
-        //        GameObject NearestEnemy = PlayerEnemyDetector.FindClosestEnemy();
-        //        if (NearestEnemy != null)
-        //        {
-        //            IsLineRendererSpawned = true;
-        //            NewLineRenderer(PlayerTransform, NearestEnemy.transform);
-        //        }
-        //    }
-        //}
     }
-    private void StopShooting()
-    {
-        //IsShooting = false;
-        //IsLineRendererSpawned = false;
-
-        //for (int i = 0; i < SpawnedLineRenderers.Count; i++) { Destroy(SpawnedLineRenderers[i]); }
-        //SpawnedLineRenderers.Clear();
-    }
-
-    // -----------
-    // Line Renderer Functions
-    // -----------
-    //private void NewLineRenderer(Transform StartPosition, Transform EndPosition)
-    //{
-    //    GameObject NewLine = Instantiate(LineRendererPrefab);
-    //    SpawnedLineRenderers.Add(NewLine);
-    //    StartCoroutine(UpdateLineRenderer(NewLine, StartPosition, EndPosition));
-    //}
-
-    //IEnumerator UpdateLineRenderer (GameObject Line, Transform StartPosition, Transform EndPosition)
-    //{
-    //    bool CheckNull = AreAllNonNull(Line, StartPosition, EndPosition);
-    //    bool CheckBool = AreAllTrue(IsShooting, IsLineRendererSpawned);
-
-    //    if (CheckNull && CheckBool)
-    //    {
-    //        Line.GetComponent<Lighting_LineRendererController>().SetPosition(StartPosition, EndPosition);
-    //        yield return new WaitForSeconds(RefreshRate);
-
-    //        GameObject Enemy = PlayerEnemyDetector.FindClosestEnemy();
-    //        if (Enemy != null) {
-    //            StartCoroutine(UpdateLineRenderer(Line, StartPosition, PlayerEnemyDetector.FindClosestEnemy().transform));
-    //        }
-            
-    //    }
-    //}
 }
