@@ -969,10 +969,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5551923840644114725, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: navmeshPrefab
-      value: 
-      objectReference: {fileID: 6965301066652638189, guid: e70cfc8746c30df4782c560676f80218, type: 3}
     - target: {fileID: 7799730976438632927, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: m_Name
       value: Engineer

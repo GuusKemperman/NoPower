@@ -2766,6 +2766,22 @@ PrefabInstance:
       propertyPath: generationRadius
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8414778832735781083, guid: ba06ada8e2ee1964ba07b69259090561, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[1]'
+      value: 
+      objectReference: {fileID: 276163445331682962, guid: 1e11d21a40371394f99015e92a96e652, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8071772417888686215, guid: edd07bfef8f6cac41b49ad43ccd27fd6, type: 3}
+    - target: {fileID: 6420062706737891085, guid: 1cb3cb9a6d85e004494a1bf4f3f0b9ca, type: 3}
+      propertyPath: 'decoration.Array.data[3]'
+      value: 
+      objectReference: {fileID: 6041618434301530646, guid: 307859d53bf22ac4eac79781f70dc3c2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
