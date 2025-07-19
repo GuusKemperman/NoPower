@@ -54,8 +54,11 @@ public class PlayerHealth : MonoBehaviour, IDependencyProvider
         currentHealth = Mathf.Clamp(currentHealth + delta, 0, maxHealth);
         OnHealthChanged?.Invoke(currentHealth);
         StartCoroutine(InvincibilityTimer());
-        
-        OnPlayerDied?.Invoke();
+
+        if (currentHealth <= 0)
+        {
+            OnPlayerDied?.Invoke();
+        }
         return true;
     }
 
