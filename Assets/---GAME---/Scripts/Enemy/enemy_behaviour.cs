@@ -9,12 +9,13 @@ public class enemy_behaviour : MonoBehaviour
     public Transform player;
     public GameObject playerOb;
     public GameObject hitfx;
-    UnityEngine.AI.NavMeshAgent agent;
+    public UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
     public float AttackRadius = 10;
-
-
+    public int Damage = 1;
+    public int Health = 1;
+    
     [SerializeField] float damageToPlayer = 3;
 
     private enum State
@@ -75,18 +76,18 @@ public class enemy_behaviour : MonoBehaviour
         {
             enemyMeshObject.GetComponent<Animator>().SetTrigger("Attack");
             AttackTimer = AttackInterval;
-            StartCoroutine(Damage());
+            StartCoroutine(DealDamage());
 
         }
     }
 
 
-    IEnumerator Damage()
+    IEnumerator DealDamage()
     {
         yield return new WaitForSeconds(attackDelay);
         if (currentState == State.Attacking)
         {
-            player.GetComponent<PlayerHealth>().ChangeHealth(-3);
+            player.GetComponent<PlayerHealth>().ChangeHealth(-1*Damage);
 
             Vector3 hitlocation = transform.position + ((player.position - transform.position) * 0.5f);
             Instantiate(hitfx, hitlocation, transform.rotation);
