@@ -18,6 +18,11 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
         return this;
     }
 
+    private void Start()
+    {
+        OnPowerChange?.Invoke(currentPower);
+    }
+
     public void ChangePower(int delta)
     {
         currentPower = Mathf.Clamp(currentPower + delta, 0, maxPower);

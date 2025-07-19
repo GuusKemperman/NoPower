@@ -9,7 +9,7 @@ public class enemy_behaviour : MonoBehaviour
     public Transform player;
     public GameObject playerOb;
     public GameObject hitfx;
-    UnityEngine.AI.NavMeshAgent agent;
+    public UnityEngine.AI.NavMeshAgent agent;
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
     public float AttackRadius = 10;
@@ -26,6 +26,9 @@ public class enemy_behaviour : MonoBehaviour
     [SerializeField]
     List<AudioClip> attackImpactAudioClips = new List<AudioClip>();
 
+    public int Damage = 1;
+    public int Health = 1;
+    
     [SerializeField] float damageToPlayer = 3;
 
     private enum State
@@ -86,18 +89,18 @@ public class enemy_behaviour : MonoBehaviour
         {
             enemyMeshObject.GetComponent<Animator>().SetTrigger("Attack");
             AttackTimer = AttackInterval;
-            StartCoroutine(Damage());
+            StartCoroutine(DealDamage());
 
         }
     }
 
 
-    IEnumerator Damage()
+    IEnumerator DealDamage()
     {
         yield return new WaitForSeconds(attackDelay);
         if (currentState == State.Attacking)
         {
-            player.GetComponent<PlayerHealth>().ChangeHealth(-3);
+            player.GetComponent<PlayerHealth>().ChangeHealth(-1*Damage);
 
             attackVoiceLineAudioSource.clip = attackAudioClips[Random.Range(0, attackAudioClips.Count)];
             attackVoiceLineAudioSource.Play();
