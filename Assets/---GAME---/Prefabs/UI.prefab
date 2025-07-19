@@ -3920,6 +3920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathVisuals: {fileID: 1220286514171655603}
+  elapsedText: {fileID: 131341141098236243}
+  killedEnemiesText: {fileID: 4101121990571185501}
 --- !u!1 &8617973994037835177
 GameObject:
   m_ObjectHideFlags: 0

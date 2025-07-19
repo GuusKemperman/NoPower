@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine;
-using UnityEngine.AI; // Required for NavMeshAgent
+using UnityEngine.AI;
+using Random = UnityEngine.Random; // Required for NavMeshAgent
 
 public class enemy_behaviour : MonoBehaviour
 {
@@ -14,7 +16,8 @@ public class enemy_behaviour : MonoBehaviour
     public GameObject enemyMeshObject;
     public float attackDelay = 0.2f;
     public float AttackRadius = 10;
-
+    public static event Action EnemyDied;
+    
     [SerializeField]
     AudioSource attackVoiceLineAudioSource;
 
@@ -45,6 +48,12 @@ public class enemy_behaviour : MonoBehaviour
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
+
+
+    private void OnDestroy()
+    {
+        EnemyDied?.Invoke();
     }
 
     // Update is called once per frame
