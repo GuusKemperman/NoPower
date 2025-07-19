@@ -84,3 +84,11 @@ MonoBehaviour:
   PlayerEnemyDetector: {fileID: 0}
   LineRendererPrefab: {fileID: 0}
   RefreshRate: 0.016666668
+  minRayLength: 2
+  maxRayLength: 7
+  regularDeviationAngle: 15
+  splittingDeviationAngle: 20
+  splitChancePerLength: 0.1
+  maxTravelDist: 2000
+  snapToEnemyRadius: 8
+  damageAmount: 10

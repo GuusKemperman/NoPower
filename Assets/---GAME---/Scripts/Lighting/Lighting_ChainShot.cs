@@ -22,16 +22,22 @@ public class Lighting_ChainShot : MonoBehaviour
 
     [SerializeField] float maxTravelDist = 45.0f;
 
+    [SerializeField] float snapToEnemyRadius = 4.0f;
+
+    [SerializeField] int damageAmount = 10;
+
     struct ChainLine
     {
         public ChainLine(Vector2 a_start, Vector2 a_end)
         {
             start = a_start;
             end = a_end;
+            hit = null;
         }
 
         public Vector2 start;
         public Vector2 end;
+        public enemy_behaviour hit;
     }
 
     List<GameObject> SpawnedLineRenderers = new List<GameObject>();
@@ -76,7 +82,32 @@ public class Lighting_ChainShot : MonoBehaviour
 
         float length = Random.Range(minRayLength, maxRayLength);
 
-        return new ChainLine(prevEnd, prevEnd + newForward * length);
+        Vector2 newEnd = prevEnd + newForward * length;
+        Vector3 newEnd3D = new Vector3(newEnd.x, 0, newEnd.y);
+
+        Collider[] colliders = Physics.OverlapSphere(newEnd3D, snapToEnemyRadius);
+        colliders.OrderBy(x => Vector3.Distance(x.transform.position, newEnd3D));
+
+        enemy_behaviour hit = null;
+
+        foreach (Collider coll in colliders)
+        {
+            enemy_behaviour enemy = coll.gameObject.GetComponent<enemy_behaviour>();
+
+            if (enemy == null
+                || enemy.Health <= 0
+                || enemy.transform.position == new Vector3(prevEnd.x, 0, prevEnd.y))
+            {
+                continue;
+            }
+
+            newEnd = new Vector2(enemy.transform.position.x, enemy.transform.position.y);
+            hit = enemy;
+            break;
+        }
+        var ret = new ChainLine(prevEnd, newEnd);
+        ret.hit = hit;
+        return ret;
     }
 
     float Orientation(Vector2 p, Vector2 q, Vector2 r)
@@ -130,7 +161,6 @@ public class Lighting_ChainShot : MonoBehaviour
         {
             GameObject NewLine = Instantiate(LineRendererPrefab);
 
-
             Debug.DrawLine(new Vector3(line.start.x, .1f, line.start.y),
                 new Vector3(line.end.x, .1f, line.end.y),
                  Color.blue, 10000.0f, false);
@@ -147,11 +177,11 @@ public class Lighting_ChainShot : MonoBehaviour
         List<ChainLine> closed = new List<ChainLine>();
 
         float totalLength = minRayLength;
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
-        open.Add(new ChainLine(transform.position, transform.position + transform.forward * minRayLength));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
+        open.Add(new ChainLine(transform.position, transform.position + transform.forward * .1f));
         
         while (open.Count > 0 && totalLength < maxTravelDist)
         {
@@ -163,15 +193,19 @@ public class Lighting_ChainShot : MonoBehaviour
 
             for (int i = 0; i < 5; i++)
             {
-                ChainLine next1 = GetNewLine(curr.start, curr.end, false);
+                ChainLine next = GetNewLine(curr.start, curr.end, true);
 
-                if (IsIntersecting(open, next1) || IsIntersecting(closed, next1))
+                if (next.hit != null)
+                {
+                    next.hit.TakeDamage(damageAmount);
+                }
+                else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
                 {
                     continue;
                 }
 
-                totalLength += (next1.start - next1.end).magnitude;
-                open.Add(next1);
+                totalLength += (next.start - next.end).magnitude;
+                open.Add(next);
                 break;
             }
 
@@ -181,15 +215,19 @@ public class Lighting_ChainShot : MonoBehaviour
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    ChainLine next2 = GetNewLine(curr.start, curr.end, true);
+                    ChainLine next = GetNewLine(curr.start, curr.end, true);
 
-                    if (IsIntersecting(open, next2) || IsIntersecting(closed, next2))
+                    if (next.hit != null)
+                    {
+                        next.hit.TakeDamage(damageAmount);
+                    }
+                    else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
                     {
                         continue;
                     }
 
-                    totalLength += (next2.start - next2.end).magnitude;
-                    open.Add(next2);
+                    totalLength += (next.start - next.end).magnitude;
+                    open.Add(next);
                     break;
                 }
             }
