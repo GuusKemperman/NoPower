@@ -26,6 +26,12 @@ public class Reactor : BaseInteractable
     [SerializeField]
     AudioSource hummingSource;
 
+    [SerializeField]
+    AudioSource interactSource;
+
+    [SerializeField]
+    List<AudioClip> audioClips = new List<AudioClip>();
+
     public override void Interact() 
     {
         if (CanDeplete())
@@ -53,12 +59,17 @@ public class Reactor : BaseInteractable
     {
         Assert.IsTrue(CanDeplete());
 
+        interactSource.Play();
+
         powerManager.ChangePower((int)currentAmountOfPower);
 
         currentAmountOfPower = 0;
         StartCoroutine(Recharge());
 
         reactorLight.intensity = 0.0f;
+
+        interactSource.clip = audioClips[Random.Range(0, audioClips.Count)];
+        interactSource.Play();
     }
 
     IEnumerator Recharge()
