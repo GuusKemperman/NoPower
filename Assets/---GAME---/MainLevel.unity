@@ -344,6 +344,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1036046266 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 8436697262657895902, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+  m_PrefabInstance: {fileID: 1459437804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1319540374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -929,6 +934,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 97694275907845916, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1036046266}
     - target: {fileID: 3713270173221604753, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.34127
