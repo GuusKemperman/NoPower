@@ -72,23 +72,22 @@ public class EnemySpawner : MonoBehaviour, DependencyInjection.IDependencyProvid
 
             int enemyCount = GameObject.FindGameObjectsWithTag("enemy").Length;
 
-            if (true)
+            if (enemyCount < maxEnemiesActive)
             {
-                if (enemyCount < maxEnemiesActive)
-                {
-                    EnemyStats foundStat = stats.FirstOrDefault(x => x.TimePassage >= timePassed) ?? stats[^1];
+                EnemyStats foundStat = stats.FirstOrDefault(x => x.TimePassage >= timePassed) ?? stats[^1];
 
-                    GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+                GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
-                    enemy_behaviour enemyBehaviour = enemy.GetComponent<enemy_behaviour>();
-                    enemyBehaviour.player = transform;
-                    enemyBehaviour.playerOb = gameObject;
-                    enemyBehaviour.Damage = foundStat.Damage;
-                    enemyBehaviour.Health = foundStat.Health;
-                    enemyBehaviour.GetComponent<NavMeshAgent>().speed = foundStat.MovementSpeed;
-                }
+                enemy.transform.localScale *= Random.Range(.9f, 1.1f);
+
+                enemy_behaviour enemyBehaviour = enemy.GetComponent<enemy_behaviour>();
+                enemyBehaviour.player = transform;
+                enemyBehaviour.playerOb = gameObject;
+                enemyBehaviour.Damage = foundStat.Damage;
+                enemyBehaviour.Health = foundStat.Health;
+                enemyBehaviour.GetComponent<NavMeshAgent>().speed = foundStat.MovementSpeed;
             }
-            
+                  
             yield return new WaitForSeconds(spawnInterval);
         }
     }
