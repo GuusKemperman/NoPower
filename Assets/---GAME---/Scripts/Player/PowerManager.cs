@@ -35,7 +35,7 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
             OnPowerChange?.Invoke(currentPower);
         }
 
-        if (prevPower < currentPower)
+        if (prevPower < currentPower && currentPower != 0)
         {
             OnGainedPower?.Invoke();
         }

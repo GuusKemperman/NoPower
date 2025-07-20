@@ -19,7 +19,7 @@ public class cutscenescript : MonoBehaviour
 
     [SerializeField] private GameObject FadeFromBlack;
 
-
+    [SerializeField] private GameObject spaceShip = null;
 
     private CanvasGroup canvas;
 
@@ -97,7 +97,10 @@ public class cutscenescript : MonoBehaviour
         {
             ob.SetActive(true);
         }
-       
+
+        yield return new WaitForSeconds(3.0f);
+
+        spaceShip.SetActive(false);
     }
 
     // Update is called once per frame
