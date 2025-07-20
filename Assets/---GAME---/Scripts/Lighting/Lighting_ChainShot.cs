@@ -28,10 +28,16 @@ public class Lighting_ChainShot : MonoBehaviour
 
     [SerializeField] int damageAmount = 10;
 
-    [SerializeField] float lineDuration = 0.4f;
+    [SerializeField] float lineDuration = 0.3f;
 
-    Queue<GameObject> myQueue = new Queue<GameObject>();
-    List<GameObject> spawnedLiners = new List<GameObject>();
+    [SerializeField] float lineDurationPerLength = 0.001f;
+
+    struct SpawnedLine
+    {
+        public GameObject renderer;
+        public float length;
+    };
+    Queue<SpawnedLine> spawnedLiners = new Queue<SpawnedLine>();
 
     public static event Action HitEnemy;
     
@@ -52,7 +58,8 @@ public class Lighting_ChainShot : MonoBehaviour
     void Update()
     {
         InputAction AttackAction = ActionMap.FindAction("Attack");
-        if (AttackAction.WasPressedThisFrame())
+        if (spawnedLiners.Count == 0
+            && AttackAction.ReadValue<float>() > 0)
         {
             StartShooting();
         }
@@ -79,30 +86,25 @@ public class Lighting_ChainShot : MonoBehaviour
 
     IEnumerator ClearLines()
     {
-
-        while (true)
+        while (spawnedLiners.Count > 0)
         {
-            for (int i =0; i < 3; i++){ 
-                if (myQueue.Count > 0) 
-                {
-                    Destroy(myQueue.Dequeue());
-                }
-                else
-                {
-                    yield break; 
-                }
+            const float startTime = .01f;
+            float timeLeft = startTime;
+
+            while (timeLeft > 0 && spawnedLiners.Count > 0)
+            {
+                var toDestroy = spawnedLiners.Dequeue();
+                Destroy(toDestroy.renderer);
+                timeLeft -= lineDurationPerLength * toDestroy.length;
             }
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(startTime);
         }
-
     }
 
     // -----------
     // Utility Functions
     // -----------
-    private bool AreAllNonNull(params object[] values) => values.All(v => v != null);
-    private bool AreAllTrue(params bool[] values) => values.All(v => v);
 
     ChainLine GetNewLine(Vector2 prevStart, Vector2 prevEnd, bool isSplitter)
     {
@@ -215,14 +217,18 @@ public class Lighting_ChainShot : MonoBehaviour
             ren.positionCount = 2;
             ren.SetPosition(1, start);
             ren.SetPosition(0, end);
-            myQueue.Enqueue(spawnedLiner);
+
+            SpawnedLine spawnedLine = new SpawnedLine();
+            spawnedLine.renderer = spawnedLiner;
+            spawnedLine.length = (line.start - line.end).magnitude;
+
+            spawnedLiners.Enqueue(spawnedLine);
 
             float rand = Random.value; // random number between 0 and 1
-            if (rand < 0.1)
+            if (rand < 0.1
+                && Particles != null)
             {
-                
                 Instantiate(Particles, end, RotationFromTwoPositions(start, end));
-
             }
         }
     }
