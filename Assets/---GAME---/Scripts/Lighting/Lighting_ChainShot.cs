@@ -350,8 +350,8 @@ public class Lighting_ChainShot : MonoBehaviour
             closed.Add(curr);
         }
 
-        DebugDraw(open);
-        DebugDraw(closed);
+       // DebugDraw(open);
+        //DebugDraw(closed);
 
         Draw(open);
         Draw(closed);
