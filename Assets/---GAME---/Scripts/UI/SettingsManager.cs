@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
@@ -17,9 +18,13 @@ public class SettingsManager : MonoBehaviour
     
     private void Awake()
     {
-        QualitySettings.SetQualityLevel(3);
-        soundSlider.value = 0.8f;
-        musicSlider.value =  0.8f;
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            QualitySettings.SetQualityLevel(3);
+            soundSlider.value = 0.8f;
+            musicSlider.value =  0.8f;
+        }
+        
         ResetCheckboxes(QualitySettings.GetQualityLevel());
     }
 
