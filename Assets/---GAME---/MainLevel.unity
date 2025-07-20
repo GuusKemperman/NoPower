@@ -1687,6 +1687,7 @@ MonoBehaviour:
   - {fileID: 128648772}
   - {fileID: 1786829146}
   - {fileID: 1332387767}
+  - {fileID: 652967321}
   musicManager: {fileID: 1943687193}
   UI: {fileID: 1461036921}
   FadeFromBlack: {fileID: 245943878}
