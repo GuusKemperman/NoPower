@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -40,8 +39,8 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] float cooldown = 1;
     bool isCoolingDown = false;
 
-    [SerializeField]
-    AudioSource shootingSource;
+    [SerializeField] AudioSource shootingSource;
+    [SerializeField] AudioSource zapCrackleSource;
 
     [SerializeField]
     List<AudioClip> shootingClips = new List<AudioClip>();
@@ -74,6 +73,9 @@ public class Lighting_ChainShot : MonoBehaviour
     private void Start()
     {
         powerManager = FindFirstObjectByType<PowerManager>();
+
+        shootingSource.clip = shootingClips[0];
+        zapCrackleSource.clip = shootingClips[1];
     }
 
     void Update()
@@ -277,9 +279,14 @@ public class Lighting_ChainShot : MonoBehaviour
         float strength = powerPercentage;
         float totalAllowedLength = Mathf.Lerp(maxTravelDistEmptyCharge, maxTravelDistFullCharge, strength);
 
-        shootingSource.clip = shootingClips[UnityEngine.Random.Range(0, shootingClips.Count)];
-        shootingSource.volume = Mathf.InverseLerp(0, maxTravelDistFullCharge, totalAllowedLength);
+        
+        // SFX
+        float volume = Mathf.InverseLerp(0.0f, maxTravelDistFullCharge, totalAllowedLength);
+        shootingSource.volume = volume;
         shootingSource.Play();
+        zapCrackleSource.volume = Mathf.Clamp(volume + 0.15f, 0.0f, 1.0f);
+        zapCrackleSource.Play();
+
 
         float totalLength = 0;
 

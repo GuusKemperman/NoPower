@@ -1603,6 +1603,103 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6645879803894078692, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
   m_PrefabInstance: {fileID: 1459437804}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1332387773
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332387767}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6119931359035177361, guid: bd015f42a742b8745b726386658126a7, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1459437804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1660,6 +1757,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: zapCrackleSource
+      value: 
+      objectReference: {fileID: 1332387773}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: snapToEnemyRadius
       value: 2
       objectReference: {fileID: 0}
@@ -1671,6 +1772,14 @@ PrefabInstance:
       propertyPath: maxTravelDistFullCharge
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: shootingClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4735041809578540519, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: 'shootingClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 19741abf3343cc448bf976aa903054fb, type: 3}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: spawnInterval
       value: 0.05
@@ -1680,28 +1789,56 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: stats.Array.data[2].Damage
+      propertyPath: stats.Array.data[0].Health
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[1].Health
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[2].Damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[2].Health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[3].Damage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[3].Health
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[4].Damage
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[4].Health
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[0].TimePassage
-      value: 60
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[1].TimePassage
-      value: 120
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[2].TimePassage
-      value: 180
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[3].TimePassage
-      value: 240
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[4].TimePassage
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: intervalCurve.m_Curve.Array.size
@@ -1892,9 +2029,13 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7202413838683309399, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6645879803894078692, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1332387773}
   m_SourcePrefab: {fileID: 100100000, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
 --- !u!1 &1461036921 stripped
 GameObject:
