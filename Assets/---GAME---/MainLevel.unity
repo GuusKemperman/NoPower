@@ -1789,28 +1789,56 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
-      propertyPath: stats.Array.data[2].Damage
+      propertyPath: stats.Array.data[0].Health
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[1].Health
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[2].Damage
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[2].Health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[3].Damage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[3].Health
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[4].Damage
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
+      propertyPath: stats.Array.data[4].Health
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[0].TimePassage
-      value: 60
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[1].TimePassage
-      value: 120
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[2].TimePassage
-      value: 180
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[3].TimePassage
-      value: 240
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: stats.Array.data[4].TimePassage
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4794749260939716244, guid: 5cd22e215cd89e84697c01f081fd1139, type: 3}
       propertyPath: intervalCurve.m_Curve.Array.size
