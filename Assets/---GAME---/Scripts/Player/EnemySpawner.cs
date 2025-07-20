@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour, DependencyInjection.IDependencyProvid
         
         if (evaulationTimer <= 0.0f)
         {
-            spawnInterval = intervalCurve.Evaluate(timePassed);
+            spawnInterval = Mathf.Max(0.001f, intervalCurve.Evaluate(timePassed));
             evaulationTimer = 5.0f;
         }
     }
