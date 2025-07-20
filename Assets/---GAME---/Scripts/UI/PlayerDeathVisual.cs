@@ -11,12 +11,14 @@ public class PlayerDeathVisual : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI elapsedText = null;
     [SerializeField] private TextMeshProUGUI killedEnemiesText = null;
+    [SerializeField] private TextMeshProUGUI killedEnemiesCounter = null;
     private int killedEnemies = 0;
     
     private void Awake()
     {
         enemy_behaviour.EnemyDied += AddCounter;
         playerHealth.OnPlayerDied += HandleDeath;
+        killedEnemiesCounter.text = "0";
     }
     private void OnDestroy()
     {
@@ -27,6 +29,7 @@ public class PlayerDeathVisual : MonoBehaviour
     private void AddCounter(enemy_behaviour beh)
     {
         killedEnemies++;
+        killedEnemiesCounter.text = $"{killedEnemies}";
     }
 
     private void HandleDeath()
