@@ -31,14 +31,14 @@ public class SettingsManager : MonoBehaviour
     public void SetLowQuality(bool toggle)
     {
         if (!toggle) return;
-        QualitySettings.SetQualityLevel(1);
+        QualitySettings.SetQualityLevel(3);
         ResetCheckboxes(0);
     }
     
     public void SetMediumQuality(bool toggle)
     {
         if (!toggle) return;
-        QualitySettings.SetQualityLevel(2);
+        QualitySettings.SetQualityLevel(3);
         ResetCheckboxes(1);
     }
     
