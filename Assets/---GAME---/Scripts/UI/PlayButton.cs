@@ -7,8 +7,7 @@ using System.Collections.Generic;
 public class PlayButton : MonoBehaviour
 {
     [SerializeField] private GameObject FadeToBlack;
-    [SerializeField] private GameObject Audio;
-
+    
 
 
     public void OnClick()
