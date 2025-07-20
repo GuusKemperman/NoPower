@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4235758654085743607}
   - component: {fileID: 1963499517055849901}
   - component: {fileID: 1947078907562679213}
-  - component: {fileID: 2689122173499020516}
   - component: {fileID: 4696006463717166815}
   m_Layer: 0
   m_Name: Enemy
@@ -56,13 +55,9 @@ MonoBehaviour:
   takeDamageFX: {fileID: 8952325000492440084, guid: 2703abe9f00e5c3469e76b09f0942359, type: 3}
   agent: {fileID: 0}
   enemyMeshObject: {fileID: 1090972848769902366}
-  onHitSFX:
-  - {fileID: 8300000, guid: 0f01973eb7787b647b5c9f565a390386, type: 3}
-  - {fileID: 8300000, guid: ea1cbbe2f9af3a841a1e3a34928e30c3, type: 3}
-  - {fileID: 8300000, guid: f09da8346b2b6b54e9b0ef3180a60e02, type: 3}
   attackDelay: 0.5
   AttackRadius: 2
-  attackVoiceLineAudioSource: {fileID: 2689122173499020516}
+  attackVoiceLineAudioSource: {fileID: 0}
   attackAudioClips:
   - {fileID: 8300000, guid: 97685245bb2964941b0733506e3da8d5, type: 3}
   - {fileID: 8300000, guid: ab78ef54c23c108409b15285141b1a92, type: 3}
@@ -88,6 +83,7 @@ MonoBehaviour:
   Health: 1
   damageToPlayer: 3
   AttackInterval: 0.5
+  spotDistance: 15
 --- !u!195 &4235758654085743607
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -143,103 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b01ee439c554a24a8948bf1b9688671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &2689122173499020516
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8000909897425623591}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -2252768185415633009, guid: bd015f42a742b8745b726386658126a7, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!82 &4696006463717166815
 AudioSource:
   m_ObjectHideFlags: 0
