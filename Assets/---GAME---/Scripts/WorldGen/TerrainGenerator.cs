@@ -248,6 +248,8 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
         surface.BuildNavMesh();
     }
 
+    List<float> spawnedDistances = new List<float>();
+
     IEnumerator SpawnReactors()
     {
         while (true)
@@ -262,36 +264,38 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
             {
                 circumFactor *= numReactorsPerCircumferenceDistanceFactor;
 
-                if (currentDist > currentlySpawnedReactorsAtDistance)
+                if (spawnedDistances.Contains(currentDist))
                 {
-                    float cirumferenceHere = currentDist * 2.0f * MathF.PI * circumFactor;
-                    int numToSpawn = Mathf.Max(1, (int)MathF.Ceiling(numReactorsPerCircumference * cirumferenceHere));
+                    continue;
+                }
+                spawnedDistances.Add(currentDist);
+                float cirumferenceHere = currentDist * 2.0f * MathF.PI * circumFactor;
+                int numToSpawn = Mathf.Max(1, (int)MathF.Ceiling(numReactorsPerCircumference * cirumferenceHere));
 
-                    List<Vector3> alreadySpawnedPrefabs = new List<Vector3>();
+                List<Vector3> alreadySpawnedPrefabs = new List<Vector3>();
 
-                    for (int i = 0; i < numToSpawn; i++)
+                for (int i = 0; i < numToSpawn; i++)
+                {
+                    float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2);
+                    Vector3 spawnPos = new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
+                    spawnPos *= currentDist;
+
+                    bool invalid = false;
+
+                    foreach (Vector3 pos in alreadySpawnedPrefabs)
                     {
-                        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2);
-                        Vector3 spawnPos = new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
-                        spawnPos *= currentDist;
-
-                        bool invalid = false;
-
-                        foreach (Vector3 pos in alreadySpawnedPrefabs)
+                        if (Vector3.Distance(pos, spawnPos) < minDistanceBetweenReactorsInSameLayer)
                         {
-                            if (Vector3.Distance(pos, spawnPos) < minDistanceBetweenReactorsInSameLayer)
-                            {
-                                invalid = true;
-                                break;
-                            }
+                            invalid = true;
+                            break;
                         }
+                    }
 
-                        if (!invalid)
-                        {
-                            Instantiate(reactorPrefab, spawnPos, Quaternion.Euler(0.0f, UnityEngine.Random.Range(0f, 360f), 0.0f));
+                    if (!invalid)
+                    {
+                        Instantiate(reactorPrefab, spawnPos, Quaternion.Euler(0.0f, UnityEngine.Random.Range(0f, 360f), 0.0f));
 
-                            alreadySpawnedPrefabs.Add(spawnPos);
-                        }
+                        alreadySpawnedPrefabs.Add(spawnPos);
                     }
                 }
             }
