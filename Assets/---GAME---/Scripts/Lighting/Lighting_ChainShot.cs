@@ -37,6 +37,9 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] float maxTravelDistEmptyCharge = 20.0f;
     [SerializeField] float maxTravelDistFullCharge = 200.0f;
 
+    [SerializeField] float cooldown = 1;
+    bool isCoolingDown = false;
+
     struct SpawnedLine
     {
         public GameObject renderer;
@@ -70,7 +73,7 @@ public class Lighting_ChainShot : MonoBehaviour
     void Update()
     {
         InputAction AttackAction = ActionMap.FindAction("Attack");
-        if (spawnedLiners.Count == 0
+        if (!isCoolingDown
             && AttackAction.ReadValue<float>() > 0)
         {
             StartShooting();
@@ -94,6 +97,13 @@ public class Lighting_ChainShot : MonoBehaviour
     {
         yield return new WaitForSeconds(lineDuration);
         StartCoroutine(ClearLines());
+    }
+
+    IEnumerator Cooldown()
+    {
+        isCoolingDown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCoolingDown = false;
     }
 
     IEnumerator ClearLines()
@@ -258,7 +268,7 @@ public class Lighting_ChainShot : MonoBehaviour
 
         powerManager.ChangePower(-powerConsumption);
 
-        float strength = Mathf.Pow(powerPercentage, 3);
+        float strength = powerPercentage;
         float totalAllowedLength = Mathf.Lerp(maxTravelDistEmptyCharge, maxTravelDistFullCharge, strength);
 
         float totalLength = 0;
@@ -347,5 +357,6 @@ public class Lighting_ChainShot : MonoBehaviour
         Draw(closed);
 
         StartCoroutine(ClearLinesAfterDelay());
+        StartCoroutine(Cooldown());
     }
 }
