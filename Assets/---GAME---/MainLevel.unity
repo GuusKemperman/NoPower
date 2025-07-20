@@ -1691,6 +1691,7 @@ MonoBehaviour:
   musicManager: {fileID: 1943687193}
   UI: {fileID: 1461036921}
   FadeFromBlack: {fileID: 245943878}
+  spaceShip: {fileID: 1767049442}
   director: {fileID: 1781672350}
 --- !u!1 &1786829146 stripped
 GameObject:
