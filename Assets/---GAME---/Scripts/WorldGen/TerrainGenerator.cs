@@ -146,7 +146,6 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
             }
             chunks.RemoveAll(
                 chunk => chunk.objectsInChunk == null || chunk.objectsInChunk.Count == 0);
-            chunks.Clear();
 
             Vector2 worldPosOfPlayerChunk = new Vector2(playerPos3D.x - playerPos3D.x % chunkSize,
                 playerPos3D.z - playerPos3D.z % chunkSize);
