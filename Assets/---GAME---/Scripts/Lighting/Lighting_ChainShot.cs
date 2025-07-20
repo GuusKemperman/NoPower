@@ -290,16 +290,16 @@ public class Lighting_ChainShot : MonoBehaviour
 
         float totalLength = 0;
 
-        while (totalLength < totalAllowedLength)
+        for (int attempt = 0; attempt < 25 && totalLength < totalAllowedLength; attempt++) 
         {
             Vector2 start = new Vector2(transform.position.x, transform.position.z);
             Vector2 delta = new Vector2(transform.forward.x, transform.forward.z) * .1f;
 
             totalLength = minRayLength * 3;
 
-            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, -5f)));
+            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, UnityEngine.Random.Range(-5f, -2.5f))));
             open.Add(new ChainLine(start, start + delta));
-            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, 5)));
+            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, UnityEngine.Random.Range(2.5f, 5f))));
 
             while (open.Count > 0 && totalLength < totalAllowedLength)
             {
