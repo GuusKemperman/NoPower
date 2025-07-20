@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,7 +10,13 @@ public class TurretShooting : MonoBehaviour
     [SerializeField] private GameObject projectile = null;
     [SerializeField] private GameObject shotPoint = null;
     [SerializeField] private int damage = 1;
-    
+
+    [SerializeField]
+    AudioSource shootingSource;
+
+    [SerializeField]
+    List<AudioClip> shootingClips = new List<AudioClip>();
+
     private TurretTarget closestTarget;
     private float shotTimer = 0.0f;
 
@@ -57,6 +64,9 @@ public class TurretShooting : MonoBehaviour
     {
         GameObject spawned =Instantiate(projectile, shotPoint.transform.position, transform.rotation);
         spawned.GetComponent<Projectile>().Damage = damage;
+
+        shootingSource.clip = shootingClips[UnityEngine.Random.Range(0, shootingClips.Count)];
+        shootingSource.Play();
     }
 
     private void HandleAiming()
