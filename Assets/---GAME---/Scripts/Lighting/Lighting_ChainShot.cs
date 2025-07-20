@@ -40,6 +40,12 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] float cooldown = 1;
     bool isCoolingDown = false;
 
+    [SerializeField]
+    AudioSource shootingSource;
+
+    [SerializeField]
+    List<AudioClip> shootingClips = new List<AudioClip>();
+
     struct SpawnedLine
     {
         public GameObject renderer;
@@ -270,6 +276,10 @@ public class Lighting_ChainShot : MonoBehaviour
 
         float strength = powerPercentage;
         float totalAllowedLength = Mathf.Lerp(maxTravelDistEmptyCharge, maxTravelDistFullCharge, strength);
+
+        shootingSource.clip = shootingClips[UnityEngine.Random.Range(0, shootingClips.Count)];
+        shootingSource.volume = Mathf.InverseLerp(0, maxTravelDistFullCharge, totalAllowedLength);
+        shootingSource.Play();
 
         float totalLength = 0;
 
