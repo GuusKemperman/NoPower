@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a813141caf56b542a5489af73ba631d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
+  range: 15
   fireRate: 1
   projectile: {fileID: 3319567204015064505, guid: f110c97896b9b7741ba1532063d3678c, type: 3}
   shotPoint: {fileID: 369381048271312246}
