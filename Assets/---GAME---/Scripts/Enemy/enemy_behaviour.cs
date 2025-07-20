@@ -94,6 +94,16 @@ public float attackDelay = 0.2f;
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+        if (distanceToPlayer > 120)
+        {
+            float angle = Random.Range(0f, Mathf.PI * 2);
+            Vector3 spawnPos = new Vector3(Mathf.Sin(angle), 0f, Mathf.Cos(angle));
+            spawnPos *= 30;
+            spawnPos.x += player.position.x;
+            spawnPos.z += player.position.z;
+            transform.position = spawnPos;
+        }
+
         if (distanceToPlayer < AttackRadius && currentState != State.Dead)
         {
             currentState = State.Attacking;
