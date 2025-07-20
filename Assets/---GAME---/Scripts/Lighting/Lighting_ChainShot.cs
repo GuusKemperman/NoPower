@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -27,10 +28,17 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] float snapToEnemyRadius = 4.0f;
 
     [SerializeField] int damageAmount = 10;
+    [SerializeField] int powerConsumption = 5;
 
     [SerializeField] float lineDuration = 0.3f;
 
     [SerializeField] float lineDurationPerLength = 0.001f;
+
+    [SerializeField] float maxTravelDistEmptyCharge = 20.0f;
+    [SerializeField] float maxTravelDistFullCharge = 200.0f;
+
+    [SerializeField] float cooldown = 1;
+    bool isCoolingDown = false;
 
     struct SpawnedLine
     {
@@ -55,10 +63,17 @@ public class Lighting_ChainShot : MonoBehaviour
         public enemy_behaviour hit;
     }
 
+    PowerManager powerManager = null;
+
+    private void Start()
+    {
+        powerManager = FindFirstObjectByType<PowerManager>();
+    }
+
     void Update()
     {
         InputAction AttackAction = ActionMap.FindAction("Attack");
-        if (spawnedLiners.Count == 0
+        if (!isCoolingDown
             && AttackAction.ReadValue<float>() > 0)
         {
             StartShooting();
@@ -82,6 +97,13 @@ public class Lighting_ChainShot : MonoBehaviour
     {
         yield return new WaitForSeconds(lineDuration);
         StartCoroutine(ClearLines());
+    }
+
+    IEnumerator Cooldown()
+    {
+        isCoolingDown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCoolingDown = false;
     }
 
     IEnumerator ClearLines()
@@ -242,6 +264,13 @@ public class Lighting_ChainShot : MonoBehaviour
         List<ChainLine> open = new List<ChainLine>();
         List<ChainLine> closed = new List<ChainLine>();
 
+        float powerPercentage = (float)powerManager.CurrentPower / (float)powerManager.MaxPower;
+
+        powerManager.ChangePower(-powerConsumption);
+
+        float strength = powerPercentage;
+        float totalAllowedLength = Mathf.Lerp(maxTravelDistEmptyCharge, maxTravelDistFullCharge, strength);
+
         float totalLength = 0;
 
         {
@@ -255,7 +284,7 @@ public class Lighting_ChainShot : MonoBehaviour
             open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta,  5)));
         }
 
-        while (open.Count > 0 && totalLength < maxTravelDist)
+        while (open.Count > 0 && totalLength < totalAllowedLength)
         {
             ChainLine curr = open[0];
             open.RemoveAt(0);
@@ -321,12 +350,13 @@ public class Lighting_ChainShot : MonoBehaviour
             closed.Add(curr);
         }
 
-        DebugDraw(open);
-        DebugDraw(closed);
+       // DebugDraw(open);
+        //DebugDraw(closed);
 
         Draw(open);
         Draw(closed);
 
         StartCoroutine(ClearLinesAfterDelay());
+        StartCoroutine(Cooldown());
     }
 }

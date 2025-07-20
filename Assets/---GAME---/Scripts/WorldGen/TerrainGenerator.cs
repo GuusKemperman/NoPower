@@ -2,6 +2,7 @@ using DependencyInjection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.AI.Navigation;
 using Unity.Mathematics;
 using UnityEngine;
@@ -38,8 +39,6 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     [SerializeField]
     float maxScaleDeviation = .2f;
 
-
-
     [SerializeField]
     float chunkSize = 20.0f;
 
@@ -49,13 +48,15 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     float generationRadius = 100.0f;
 
     [SerializeField]
+    float destroyRadiusFactor = 1.5f;
+
+    [SerializeField]
     GameObject chunkGround = null;
 
     [SerializeField] private GameObject navmeshPrefab = null;
     
     [SerializeField]
     List<GameObject> decoration = new List<GameObject>();
-
 
     [SerializeField] 
     List<GameObject> buildings = new List<GameObject>();
@@ -119,7 +120,9 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
     {
         while (true)
         {
-            // Placeholder terrain clearing
+            Vector3 playerPos3D = player.transform.position;
+            Vector2 playerPos2D = new Vector2(playerPos3D.x, playerPos3D.z);
+
             foreach (Chunk chunk in chunks)
             {
                 if (chunk.objectsInChunk == null)
@@ -127,14 +130,23 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                     continue;
                 }
 
+                Vector2 centre = CellToWorld(chunk.cellPos) + new Vector2(chunkSize, chunkSize) * .5f;
+
+                if (Vector2.Distance(playerPos2D, centre) <= generationRadius * destroyRadiusFactor + chunkSize * .5f)
+                {
+                    continue;
+                }
+
+                // Otherwise destroy
                 foreach (GameObject obj in chunk.objectsInChunk)
                 {
                     Destroy(obj);
                 }
+                chunk.objectsInChunk.Clear();
             }
-            chunks.Clear();
+            chunks.RemoveAll(
+                chunk => chunk.objectsInChunk == null || chunk.objectsInChunk.Count == 0);
 
-            Vector3 playerPos3D = player.transform.position;
             Vector2 worldPosOfPlayerChunk = new Vector2(playerPos3D.x - playerPos3D.x % chunkSize,
                 playerPos3D.z - playerPos3D.z % chunkSize);
 
@@ -150,6 +162,13 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
             {
                 for (int y = chunkPosOfPlayerChunk.y - radiusInCells; y <= chunkPosOfPlayerChunk.y + radiusInCells; y++)
                 {
+                    Vector2Int cellpos = new Vector2Int(x, y);
+
+                    if (chunks.Exists(chunk => chunk.cellPos == cellpos))
+                    {
+                        continue;
+                    }
+
                     int chunkHash = HashCode.Combine(x, y);
                     System.Random rnd = new System.Random(chunkHash);
 

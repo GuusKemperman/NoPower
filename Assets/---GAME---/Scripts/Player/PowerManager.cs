@@ -21,13 +21,23 @@ public class PowerManager : MonoBehaviour,IDependencyProvider
 
     private void Start()
     {
+        currentPower = -1;
         OnPowerChange?.Invoke(currentPower);
     }
 
     public void ChangePower(int delta)
     {
+        int prevPower = currentPower;
         currentPower = Mathf.Clamp(currentPower + delta, 0, maxPower);
-        OnPowerChange?.Invoke(currentPower);
-        OnGainedPower?.Invoke();
+
+        if (prevPower != currentPower)
+        {
+            OnPowerChange?.Invoke(currentPower);
+        }
+
+        if (prevPower < currentPower)
+        {
+            OnGainedPower?.Invoke();
+        }
     }
 }
