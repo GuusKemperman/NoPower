@@ -57,21 +57,6 @@ MonoBehaviour:
   enemyMeshObject: {fileID: 1090972848769902366}
   attackDelay: 0.5
   AttackRadius: 2
-  attackVoiceLineAudioSource: {fileID: 0}
-  attackAudioClips:
-  - {fileID: 8300000, guid: 97685245bb2964941b0733506e3da8d5, type: 3}
-  - {fileID: 8300000, guid: ab78ef54c23c108409b15285141b1a92, type: 3}
-  - {fileID: 8300000, guid: 9447f5f359879f64a9246c05934af4c8, type: 3}
-  - {fileID: 8300000, guid: fbf73736fe07f204690d3960969865c8, type: 3}
-  - {fileID: 8300000, guid: fb50b1bacde566e42a91146dedf3aa65, type: 3}
-  - {fileID: 8300000, guid: a2dde27cdc68e8c4ca517f48163e1314, type: 3}
-  - {fileID: 8300000, guid: 0eed213d4324f0c478bd6e7e8b58c1d9, type: 3}
-  - {fileID: 8300000, guid: e0cb55b33dc67084b946dc3e92290439, type: 3}
-  - {fileID: 8300000, guid: d5699f19484d31f45bfeb33f964ae5e7, type: 3}
-  - {fileID: 8300000, guid: d57078df92e5bf3499530633a43a4c33, type: 3}
-  - {fileID: 8300000, guid: 56ecbb8e4fd5a984888b89fc0ff32586, type: 3}
-  - {fileID: 8300000, guid: 6c84b5475c451504897edb6e1b8708c2, type: 3}
-  - {fileID: 8300000, guid: 713ba97f30e0b854ab0cd551ce0a6e34, type: 3}
   attackImpactAudioSource: {fileID: 4696006463717166815}
   attackImpactAudioClips:
   - {fileID: 8300000, guid: 7bbefb832c5d37048a76dddbd47cae80, type: 3}
@@ -196,7 +181,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
