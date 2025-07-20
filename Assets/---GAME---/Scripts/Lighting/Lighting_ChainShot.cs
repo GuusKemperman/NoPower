@@ -309,16 +309,19 @@ public class Lighting_ChainShot : MonoBehaviour
                 float dist = (curr.end - curr.start).magnitude;
                 float splitChance = splitChancePerLength * dist;
 
+                bool anyHit = false;
+
                 for (int i = 0; i < 5; i++)
                 {
                     ChainLine next = GetNewLine(curr.start, curr.end, false);
 
                     if (next.hit != null)
                     {
-                        totalLength += (next.start - next.end).magnitude;
+                        totalLength += Mathf.Max(minRayLength, (next.start - next.end).magnitude);
 
                         next.hit.TakeDamage(damageAmount);
                         closed.Add(next);
+                        anyHit = true;
                         break;
                     }
                     else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
@@ -328,12 +331,18 @@ public class Lighting_ChainShot : MonoBehaviour
                     else
                     {
                         totalLength += (next.start - next.end).magnitude;
-
+                        anyHit = true;
                         open.Add(next);
                         break;
                     }
                 }
 
+                if (!anyHit)
+                {
+                    totalLength += minRayLength;
+                }
+
+                anyHit = false;
                 bool hasSplitter = UnityEngine.Random.Range(0f, 1f) < splitChance;
 
                 if (hasSplitter)
@@ -344,10 +353,11 @@ public class Lighting_ChainShot : MonoBehaviour
 
                         if (next.hit != null)
                         {
-                            totalLength += (next.start - next.end).magnitude;
+                            totalLength += Mathf.Max(minRayLength, (next.start - next.end).magnitude);
 
                             next.hit.TakeDamage(damageAmount);
                             closed.Add(next);
+                            anyHit = true;
                             break;
                         }
                         else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
@@ -357,10 +367,15 @@ public class Lighting_ChainShot : MonoBehaviour
                         else
                         {
                             totalLength += (next.start - next.end).magnitude;
-
+                            anyHit = true;
                             open.Add(next);
                             break;
                         }
+                    }
+
+                    if (!anyHit)
+                    {
+                        totalLength += minRayLength;
                     }
                 }
 
