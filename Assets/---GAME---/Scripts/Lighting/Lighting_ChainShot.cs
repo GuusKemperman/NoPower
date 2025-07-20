@@ -273,57 +273,28 @@ public class Lighting_ChainShot : MonoBehaviour
 
         float totalLength = 0;
 
+        while (totalLength < totalAllowedLength)
         {
-            Vector2 start = new Vector2(transform.position.x, transform.position.z); 
+            Vector2 start = new Vector2(transform.position.x, transform.position.z);
             Vector2 delta = new Vector2(transform.forward.x, transform.forward.z) * .1f;
 
             totalLength = minRayLength * 3;
 
             open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, -5f)));
             open.Add(new ChainLine(start, start + delta));
-            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta,  5)));
-        }
+            open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta, 5)));
 
-        while (open.Count > 0 && totalLength < totalAllowedLength)
-        {
-            ChainLine curr = open[0];
-            open.RemoveAt(0);
-
-            float dist = (curr.end - curr.start).magnitude;
-            float splitChance = splitChancePerLength * dist;
-
-            for (int i = 0; i < 5; i++)
+            while (open.Count > 0 && totalLength < totalAllowedLength)
             {
-                ChainLine next = GetNewLine(curr.start, curr.end, false);
+                ChainLine curr = open[0];
+                open.RemoveAt(0);
 
-                if (next.hit != null)
-                {
-                    totalLength += (next.start - next.end).magnitude;
+                float dist = (curr.end - curr.start).magnitude;
+                float splitChance = splitChancePerLength * dist;
 
-                    next.hit.TakeDamage(damageAmount);
-                    closed.Add(next);
-                    break;
-                }
-                else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
-                {
-                    continue;
-                }
-                else
-                {
-                    totalLength += (next.start - next.end).magnitude;
-
-                    open.Add(next);
-                    break;
-                }
-            }
-
-            bool hasSplitter = UnityEngine.Random.Range(0f, 1f) < splitChance;
-
-            if (hasSplitter)
-            {
                 for (int i = 0; i < 5; i++)
                 {
-                    ChainLine next = GetNewLine(curr.start, curr.end, true);
+                    ChainLine next = GetNewLine(curr.start, curr.end, false);
 
                     if (next.hit != null)
                     {
@@ -345,12 +316,42 @@ public class Lighting_ChainShot : MonoBehaviour
                         break;
                     }
                 }
-            }
 
-            closed.Add(curr);
+                bool hasSplitter = UnityEngine.Random.Range(0f, 1f) < splitChance;
+
+                if (hasSplitter)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        ChainLine next = GetNewLine(curr.start, curr.end, true);
+
+                        if (next.hit != null)
+                        {
+                            totalLength += (next.start - next.end).magnitude;
+
+                            next.hit.TakeDamage(damageAmount);
+                            closed.Add(next);
+                            break;
+                        }
+                        else if (IsIntersecting(open, next) || IsIntersecting(closed, next))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            totalLength += (next.start - next.end).magnitude;
+
+                            open.Add(next);
+                            break;
+                        }
+                    }
+                }
+
+                closed.Add(curr);
+            }
         }
 
-       // DebugDraw(open);
+        // DebugDraw(open);
         //DebugDraw(closed);
 
         Draw(open);
