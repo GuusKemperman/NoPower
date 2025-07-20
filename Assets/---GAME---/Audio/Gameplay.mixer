@@ -194,6 +194,7 @@ AudioMixerController:
     - 1028de26f7d93814894bf58c3a506b3b
     - 438c2be31d7d6ef46bdc682ea6881151
     - 60fc50c00e1ccba40874f59c05e2e76b
+    - b66cafd3a66979948a952d63b9c6973d
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -213,6 +214,7 @@ AudioMixerGroupController:
   - {fileID: -5115475726048613244}
   - {fileID: 143256807684688625}
   - {fileID: 2570260913042519078}
+  - {fileID: 6119931359035177361}
   m_Volume: 827653c00849d6d4d99ac87e5e2834da
   m_Pitch: 7398c29c5916a2d42989c745a367b6b2
   m_Send: 00000000000000000000000000000000
@@ -247,7 +249,9 @@ AudioMixerSnapshotController:
   m_SnapshotID: 40f3bd816bc52624ea7ffd4020e4d04d
   m_FloatValues:
     827653c00849d6d4d99ac87e5e2834da: -0.16685188
+    31f97489315fa724393f7c5822f7878a: -2.8722973
     a3cff1b99380628488450c2d28c6ab86: -20.098171
+    87e2602abf9390945aeb02873873676b: -7.8940816
     b704490b30d045540bf200937fc98e3b: -29.519157
     28dacc2b461f27547bdd6dc1682479f4: -19.255655
     185ba6bd45e121440ac492ff029649d2: -12.498478
@@ -325,6 +329,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &2662297521991741508
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 7f9a775a02bf71742b28ee1870075184
+  m_EffectName: Attenuation
+  m_MixLevel: 72f7184b894b6484eab9b78e5a7cad1e
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &4379597053048521109
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -368,6 +386,25 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -9133119323197827244}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &6119931359035177361
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerShooting
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: b66cafd3a66979948a952d63b9c6973d
+  m_Children: []
+  m_Volume: f39d7e800a6c4214c9ace9285764e5ee
+  m_Pitch: b73956d680ac1c94fa712eb6816d4a5a
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 2662297521991741508}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
