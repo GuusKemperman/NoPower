@@ -6500,6 +6500,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7986465652128293866}
     m_Modifications:
+    - target: {fileID: 781048792123625644, guid: 495df23865bdf3745b99fd1f32d7d513, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b670241cac7075a4eab33b36c1132d90, type: 2}
+    - target: {fileID: 781048792123625644, guid: 495df23865bdf3745b99fd1f32d7d513, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b670241cac7075a4eab33b36c1132d90, type: 2}
     - target: {fileID: 916347838235080924, guid: 495df23865bdf3745b99fd1f32d7d513, type: 3}
       propertyPath: SubModule.enabled
       value: 0
