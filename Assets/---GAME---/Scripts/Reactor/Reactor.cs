@@ -1,6 +1,7 @@
 using DependencyInjection;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,10 +20,10 @@ public class Reactor : BaseInteractable
     float rechargeTime = 5.0f;
 
     [SerializeField]
-    Light reactorLight = null;
+    List<Light> reactorLights = new List<Light>();
 
-    float intensityLight = 0;
-
+    private List<float> intensities = new List<float>();
+    
     [SerializeField]
     AudioSource hummingSource;
 
@@ -31,6 +32,8 @@ public class Reactor : BaseInteractable
 
     [SerializeField]
     List<AudioClip> audioClips = new List<AudioClip>();
+
+    [SerializeField] private List<GameObject> toDisableOnDeplete = new List<GameObject>();
 
     public override void Interact() 
     {
@@ -43,7 +46,18 @@ public class Reactor : BaseInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        intensityLight = reactorLight.intensity;
+        reactorLights = GetComponentsInChildren<Light>().ToList();
+        
+        foreach (Light light in reactorLights)
+        {
+            intensities.Add(light.intensity);
+        }
+
+        foreach (GameObject go in toDisableOnDeplete)
+        {
+            go.SetActive(true);
+        }
+        
         currentAmountOfPower = maxAmountOfPower;
         powerManager = FindAnyObjectByType<PowerManager>();
         Assert.IsNotNull(powerManager);
@@ -66,7 +80,15 @@ public class Reactor : BaseInteractable
         currentAmountOfPower = 0;
         StartCoroutine(Recharge());
 
-        reactorLight.intensity = 0.0f;
+        foreach (Light light in reactorLights)
+        {
+            light.intensity = 0.0f;
+        }
+        
+        foreach (GameObject go in toDisableOnDeplete)
+        {
+            go.SetActive(false);
+        }
 
         interactSource.clip = audioClips[Random.Range(0, audioClips.Count)];
         interactSource.Play();
@@ -84,8 +106,18 @@ public class Reactor : BaseInteractable
             yield return new WaitForEndOfFrame();
         }
 
+        foreach (GameObject go in toDisableOnDeplete)
+        {
+            go.SetActive(true);
+        }
+        
         hummingSource.volume = 1;
-        reactorLight.intensity = intensityLight;
+
+        for (int i = 0; i < reactorLights.Count; i++)
+        {
+            reactorLights[i].intensity = intensities[i];
+        }
+
         currentAmountOfPower = maxAmountOfPower;
         rechargeTime *= 2;
     }
