@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -27,10 +28,14 @@ public class Lighting_ChainShot : MonoBehaviour
     [SerializeField] float snapToEnemyRadius = 4.0f;
 
     [SerializeField] int damageAmount = 10;
+    [SerializeField] int powerConsumption = 5;
 
     [SerializeField] float lineDuration = 0.3f;
 
     [SerializeField] float lineDurationPerLength = 0.001f;
+
+    [SerializeField] float maxTravelDistEmptyCharge = 20.0f;
+    [SerializeField] float maxTravelDistFullCharge = 200.0f;
 
     struct SpawnedLine
     {
@@ -53,6 +58,13 @@ public class Lighting_ChainShot : MonoBehaviour
         public Vector2 start;
         public Vector2 end;
         public enemy_behaviour hit;
+    }
+
+    PowerManager powerManager = null;
+
+    private void Start()
+    {
+        powerManager = FindFirstObjectByType<PowerManager>();
     }
 
     void Update()
@@ -242,6 +254,13 @@ public class Lighting_ChainShot : MonoBehaviour
         List<ChainLine> open = new List<ChainLine>();
         List<ChainLine> closed = new List<ChainLine>();
 
+        float powerPercentage = (float)powerManager.CurrentPower / (float)powerManager.MaxPower;
+
+        powerManager.ChangePower(-powerConsumption);
+
+        float strength = Mathf.Pow(powerPercentage, 3);
+        float totalAllowedLength = Mathf.Lerp(maxTravelDistEmptyCharge, maxTravelDistFullCharge, strength);
+
         float totalLength = 0;
 
         {
@@ -255,7 +274,7 @@ public class Lighting_ChainShot : MonoBehaviour
             open.Add(new ChainLine(start, start + RotateVec2ByAngle(delta,  5)));
         }
 
-        while (open.Count > 0 && totalLength < maxTravelDist)
+        while (open.Count > 0 && totalLength < totalAllowedLength)
         {
             ChainLine curr = open[0];
             open.RemoveAt(0);
