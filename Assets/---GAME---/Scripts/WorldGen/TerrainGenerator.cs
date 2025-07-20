@@ -29,6 +29,8 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
 
     [SerializeField]
     float objectDensity = .1f;
+    [SerializeField]
+    float buildingDensity = .005f;
 
     [SerializeField]
     float maxNonYRotation = 15.0f;
@@ -41,8 +43,6 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
 
     [SerializeField]
     float chunkSize = 20.0f;
-
-    [SerializeField] float numberOfBuildingsInChunk = 0.5f;
 
     [SerializeField]
     float generationRadius = 100.0f;
@@ -157,6 +157,7 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
 
             float area = chunkSize * chunkSize;
             float avgNumObjectsPerChunk = objectDensity * area;
+            float avgNumBuildingsPerChunk = buildingDensity * area;
 
             for (int x = chunkPosOfPlayerChunk.x - radiusInCells; x <= chunkPosOfPlayerChunk.x + radiusInCells; x++)
             {
@@ -204,12 +205,11 @@ public class TerrainGenerator : MonoBehaviour, DependencyInjection.IDependencyPr
                         chunk.objectsInChunk.Add(newDecoration);
                     }
 
-
+                    float numManMadeFloat = (float)rnd.NextDouble() * avgNumBuildingsPerChunk * 2.0f;
 
                     int numManMadeObjectsInt = Convert.ToBoolean(rnd.Next() & 1)
-                        ? (int)MathF.Floor(numberOfBuildingsInChunk)
-                        : (int)MathF.Ceiling(numberOfBuildingsInChunk);
-
+                        ? (int)MathF.Floor(numManMadeFloat)
+                        : (int)MathF.Ceiling(numManMadeFloat);
 
                     for (int i = 0; i < numManMadeObjectsInt; i++)
                     {
