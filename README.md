@@ -2,6 +2,8 @@
 
 # [Play it on Itch!](https://kenarf.itch.io/no-power)
 
+https://github.com/user-attachments/assets/52e35d87-2e86-412b-9775-99291e48c9f5
+
 <p> </p>
 <p>A survivorlike game where the player uses electric power to defeat robots on mars, place turrets and uses their electric gun to shock the enemies and survive the longest!</p>
 <p>A game created for Kenney Jam 2025 by:</p>
